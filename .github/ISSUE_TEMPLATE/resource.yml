@@ -1,0 +1,32 @@
+name: Suggest a resource
+description: Recommend a recovery paper, benchmark, or official guide
+title: "[Resource]: "
+body:
+  - type: input
+    id: url
+    attributes:
+      label: Canonical primary source URL
+      placeholder: https://arxiv.org/abs/...
+    validations:
+      required: true
+  - type: textarea
+    id: relevance
+    attributes:
+      label: What failed? What recovered? What are the limitations?
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Recovery category
+      options:
+        - Detection and diagnosis
+        - Intervention and self-recovery
+        - Tool failure and replanning
+        - Checkpoint and rollback
+        - External state and idempotency
+        - Durable execution
+        - Multi-agent fault containment
+        - Benchmarking
+    validations:
+      required: true
