@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+type: dataset
+message: "If you reference this curated collection, please cite the repository; cite original papers for their experimental findings."
+authors:
+  - family-names: "Asadolahi"
+    given-names: "Mohammad"
+title: "Awesome Agent Recovery: Curated Papers, Benchmarks, and Production Patterns"
+abstract: "A curated research and engineering index of AI agent failure recovery, including self-healing, tool failure recovery, checkpoint and rollback, and durable execution."
+date-released: 2026-10-28
+url: "https://github.com/MohammadAsadolahi/Awesome-Agent-Recovery"
+repository-code: "https://github.com/MohammadAsadolahi/Awesome-Agent-Recovery"
+license: CC0-1.0
+keywords:
+  - ai-agents
+  - agentic-ai
+  - agent-recovery
+  - fault-tolerance
+  - self-healing
+  - durable-execution

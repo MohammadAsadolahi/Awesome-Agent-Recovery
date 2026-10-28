@@ -1,16 +1,36 @@
 # Awesome Agent Recovery 🛟
 
-> **Detect → Diagnose → Recover → Verify → Resume.** A curated, research-to-production guide to making autonomous AI agents resilient when things go wrong.
+[![Quality checks](https://github.com/MohammadAsadolahi/Awesome-Agent-Recovery/actions/workflows/quality.yml/badge.svg)](https://github.com/MohammadAsadolahi/Awesome-Agent-Recovery/actions/workflows/quality.yml)
+[![Research index](https://img.shields.io/badge/curated_resources-36-2563eb)](data/resources.csv)
+[![License: CC0 1.0](https://img.shields.io/badge/metadata_license-CC0--1.0-16a34a)](LICENSE)
+[![Contributions welcome](https://img.shields.io/badge/contributions-welcome-8b5cf6)](CONTRIBUTING.md)
 
-**Awesome Agent Recovery** maps the papers, benchmarks, implementations, and engineering practices for **failure recovery in LLM-based and agentic AI systems**. Unlike general agent-framework directories, it starts from a concrete question: **when an agent has made a mistake, how can we safely repair the world it acted on and continue?**
+![Awesome Agent Recovery: research-to-production guide for detecting, diagnosing, repairing, verifying and resuming failing AI agents](assets/agent-recovery-banner.svg)
 
-**Updated:** 28 October 2026 · **Focus:** error detection, intervention, retries, replanning, checkpointing, reversible actions, durable execution, and recovery measurement.
+**Awesome Agent Recovery** is an open-source, curated knowledge base for **AI agent failure recovery**, **self-healing AI agents**, and **reliable LLM agent systems**. Explore research papers, benchmarks, reference implementations, and production engineering patterns for tool failure recovery, fault tolerance, safe retries and idempotency, checkpointing and rollback, durable execution, multi-agent recovery, and verification.
+
+**The question we answer:** _When an AI agent fails, how can we find the error, safely repair real state, and resume—without repeating destructive actions?_
+
+**For:** AI and LLM researchers, agent framework authors, developers operating autonomous agents in production, and evaluation/safety teams.
+
+**Jump to:** [Research papers](#research-papers) · [Failure-mode guide](#find-a-recovery-strategy) · [Recovery benchmarks](#benchmarks-and-evaluation) · [Production frameworks](#production-systems-and-implementation-guides) · [Runnable example](#try-a-failure-injection-example) · [FAQ](#frequently-asked-questions)
 
 > [!IMPORTANT]
-> **Continuing a conversation ≠ resuming a crashed workflow ≠ restoring a workspace ≠ undoing an external action.** The state and the failure boundary matter. A timed-out payment or deletion must not be retried blindly.
+> **Recovering conversation context is not the same as restoring a workspace or undoing external side effects.** After an ambiguous tool result, verify authoritative application state before retrying.
+
+## What is AI agent recovery?
+
+**AI agent recovery** is the process of detecting and diagnosing failures in an autonomous agent, selecting a safe corrective action, verifying the real outcome, and either resuming the task or stopping safely. It may involve tool-call retries, replanning, self-correction, checkpoint restoration, compensation for external effects, or human intervention.
+
+This repository focuses on **verified recovery after failure** rather than general-purpose agent orchestration, observability, or prompt engineering. A recovery strategy is only successful when the relevant state is correct—not merely when an LLM says the task succeeded.
+
+**Quick start:** If you have a concrete failure, use [Find a recovery strategy](#find-a-recovery-strategy). To compare research, start with [recent papers](#start-here). To make a production workflow resilient, open the [engineering field guide](docs/field-guide.md).
+
+**Last curated review:** 28 October 2026. Paper results are reported by their authors unless independently reproduced. The included code example is a simulator, not a production transaction service.
 
 ## Contents
 
+- [What is AI agent recovery?](#what-is-ai-agent-recovery)
 - [Start here](#start-here)
 - [Find a recovery strategy](#find-a-recovery-strategy)
 - [Research papers](#research-papers)
@@ -18,6 +38,7 @@
 - [Production systems and implementation guides](#production-systems-and-implementation-guides)
 - [Try a failure-injection example](#try-a-failure-injection-example)
 - [Engineering reference](#engineering-reference)
+- [Frequently asked questions](#frequently-asked-questions)
 - [Related collections](#related-collections)
 - [Contributing](#contributing)
 
@@ -50,18 +71,31 @@ Five recent papers frame the field:
 | The agent might recover without intervention | [ReCoF](https://arxiv.org/abs/2610.36471) | Compare intervention cost against likelihood of self-recovery |
 | An effect cannot be safely undone | [Recovery field guide](docs/field-guide.md) | Stop or escalate; *safe abstention* can be the correct result |
 
-### The recovery loop
+### The agent recovery decision flow
 
-~~~text
-Observe → Detect → Diagnose → Reconcile authoritative state
-                                  ↓
-                     Decide: retry / replan / restore
-                             compensate / escalate / stop
-                                  ↓
-                         Verify actual outcome
-                                  ↓
-                       Resume or stop safely
-~~~
+The flow below distinguishes **reconciliation**, **safe retry**, **restoration or compensation**, and **escalation**. It is a general decision aid, not an automated guarantee:
+
+```mermaid
+flowchart TD
+    A["Tool error or suspicious agent outcome"] --> B["Detect and diagnose the failure"]
+    B --> C["Reconcile against authoritative state"]
+    C --> D{"Desired state already verified?"}
+    D -->|Yes| Z["Resume from verified state"]
+    D -->|No or uncertain| E{"Operation safely repeatable?"}
+    E -->|Yes| F["Bounded retry or replan with safeguards"]
+    E -->|No| G{"Restorable or compensatable?"}
+    G -->|Yes| H["Restore or compensate with safeguards"]
+    G -->|No or unknown| I["Stop and escalate for review"]
+    F --> V["Independently verify real outcome"]
+    H --> V
+    V --> R{"Correct state confirmed?"}
+    R -->|Yes| Z
+    R -->|No| I
+```
+
+**Text alternative:** detect the failure → diagnose and reconcile authoritative state → choose a bounded retry, safe restoration/compensation, or escalation → independently verify → resume only from a verified correct state.
+
+See the [field guide](docs/field-guide.md) for the failure-class decision tree and non-idempotent write example.
 
 **Rule of thumb:** never infer from an LLM response that an external write succeeded, failed, or was undone. Use authoritative application state and independent verification.
 
@@ -155,6 +189,30 @@ Expected simulation: blind retry causes **2** writes, whereas reconciliation wit
 - [ ] Failure injection covers timeouts, partial effects, silent tool corruption, and crashes.
 - [ ] Sensitive actions apply appropriate approval and audit controls.
 
+## Frequently asked questions
+
+### What is the difference between agent recovery, agent observability, and agent memory?
+
+**Observability** helps detect and explain what happened. **Memory** preserves selected task or conversational context. **Recovery** selects and verifies a corrective action that restores safe progress. They overlap, but neither a trace nor remembered messages guarantee that a remote operation was repaired.
+
+### How can an AI agent recover from a failed tool call?
+
+First identify whether the call was read-only or effectful. For effectful calls with an ambiguous result, inspect the authoritative external state before retrying. Use stable idempotency keys where supported, bounded retries for safe actions, compensation or rollback where possible, and human escalation for irreversible uncertainty. See [the decision guide](docs/field-guide.md).
+
+### Is checkpointing the same as rollback of an external action?
+
+**No.** A checkpoint may restore agent or sandbox state, while changes made to third-party services may persist. Compensating actions and independent verification must be handled separately. See [production recovery boundaries](docs/production-systems.md).
+
+### What benchmarks measure agent failure recovery?
+
+Examples include **CUA-Recovery** (computer-use error correction), **ToolMaze** (tool failure and replanning), **ReInBench** (self-recovery and when to intervene), **RegretBench** (backup awareness), and **MettleBench** (checkpoint/recovery). Their scores are not directly comparable. See [benchmark details](docs/benchmarks.md).
+
+### What tools or frameworks support durable agent execution?
+
+Examples documented here include **Temporal, Inngest, DBOS, Restate, LangGraph, and Pydantic AI**. They support different persistence and replay boundaries; none universally reverses arbitrary external side effects. Start with the [production comparison](docs/production-systems.md).
+
+For more answers, source links, and concise definitions useful to researchers and AI assistants, see the [full FAQ](docs/faq.md), [machine-readable research index](data/resources.json), and [llms.txt](llms.txt).
+
 ## Related collections
 
 We aim to complement, not duplicate:
@@ -164,6 +222,10 @@ We aim to complement, not duplicate:
 - [Awesome LLM Agent Trajectory Analysis](https://github.com/IcyFeather233/Awesome-LLM-Agent-Trajectory-Analysis) — survey-oriented trajectory research.
 - [Awesome Agent Harness](https://github.com/Gloriaameng/Awesome-Agent-Harness) — harness designs including runtime controls.
 - [Awesome AgentOps](https://github.com/natnew/awesome-agentops) — monitoring and operational tooling.
+
+## Help this research reference grow
+
+If you found a relevant paper or fixed a real agent failure using these resources, **[⭐ star Awesome Agent Recovery](https://github.com/MohammadAsadolahi/Awesome-Agent-Recovery)** to bookmark it and help others discover it. Better still, [suggest a resource](https://github.com/MohammadAsadolahi/Awesome-Agent-Recovery/issues/new/choose) or submit a reproducible recovery example. We prioritize accurate annotations over inflated lists.
 
 ## Contributing
 

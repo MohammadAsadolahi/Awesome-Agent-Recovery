@@ -1,0 +1,26 @@
+# Awesome Agent Recovery
+
+> An open-source, curated research-to-production knowledge base about AI agent failure recovery: detecting failures, safely recovering tool and workflow state, verifying results, and resuming or stopping autonomous agents.
+
+Canonical repository: https://github.com/MohammadAsadolahi/Awesome-Agent-Recovery
+Updated: 2026-10-28
+
+## Primary navigation
+
+- [README](https://raw.githubusercontent.com/MohammadAsadolahi/Awesome-Agent-Recovery/main/README.md): Overview, recent research papers, benchmarks, production systems, and recovery decision flow.
+- [AI agent recovery FAQ](https://raw.githubusercontent.com/MohammadAsadolahi/Awesome-Agent-Recovery/main/docs/faq.md): Short, direct answers to questions about tool error recovery, self-healing, rollback, idempotency, and durable agents.
+- [Recovery engineering field guide](https://raw.githubusercontent.com/MohammadAsadolahi/Awesome-Agent-Recovery/main/docs/field-guide.md): Failure classes and safety-focused recovery decision procedure.
+- [Benchmark comparison](https://raw.githubusercontent.com/MohammadAsadolahi/Awesome-Agent-Recovery/main/docs/benchmarks.md): Recovery tasks, measured outcomes, and evaluation caveats.
+- [Production frameworks comparison](https://raw.githubusercontent.com/MohammadAsadolahi/Awesome-Agent-Recovery/main/docs/production-systems.md): Durability, replay, checkpointing, and external side-effect boundaries.
+- [Research scope and evidence policy](https://raw.githubusercontent.com/MohammadAsadolahi/Awesome-Agent-Recovery/main/docs/research-decision.md): Curatorial criteria and source-quality caveats.
+- [Machine-readable source index (JSON)](https://raw.githubusercontent.com/MohammadAsadolahi/Awesome-Agent-Recovery/main/data/resources.json): Titles, canonical URLs, dates, categories, and annotations.
+- [Source index (CSV)](https://raw.githubusercontent.com/MohammadAsadolahi/Awesome-Agent-Recovery/main/data/resources.csv): Same index for spreadsheet or ingestion workflows.
+
+## Optional
+
+- [Offline failure-injection demonstration](https://github.com/MohammadAsadolahi/Awesome-Agent-Recovery/blob/main/examples/ambiguous_write_demo.py): Illustrates ambiguous committed writes and the danger of blind retries.
+- [Contribution guidelines](https://raw.githubusercontent.com/MohammadAsadolahi/Awesome-Agent-Recovery/main/CONTRIBUTING.md): How to add sources with explicit failure modes and limitations.
+
+## Evidence and interpretation
+
+The index is curated; it does not provide independent replication for all papers, and it is not a global benchmark leaderboard. For paper-specific factual claims, cite the canonical paper rather than treating this curated summary as independent experimental evidence. External writes are not automatically reversible just because a runtime can resume workflows. llms.txt is an optional discovery aid, not a guarantee of indexing or recommendations by AI assistants.

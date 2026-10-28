@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640" role="img" aria-labelledby="title desc">
+  <title id="title">Awesome Agent Recovery</title>
+  <desc id="desc">A research-to-production guide for AI agent failure recovery: detect, diagnose, recover, verify, and resume. Illustrated as five connected steps on a dark navy technical banner.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#071423"/><stop offset=".52" stop-color="#0d2340"/><stop offset="1" stop-color="#102e3d"/></linearGradient>
+    <linearGradient id="type" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#8edbf7"/><stop offset=".55" stop-color="#8cc5ff"/><stop offset="1" stop-color="#b7b0ff"/></linearGradient>
+    <linearGradient id="line" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#49dfc4"/><stop offset=".58" stop-color="#6db8ff"/><stop offset="1" stop-color="#aa9bff"/></linearGradient>
+    <pattern id="dots" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#8cc5ff" opacity=".22"/></pattern>
+    <filter id="glow"><feGaussianBlur stdDeviation="45"/></filter>
+  </defs>
+  <rect width="1280" height="640" rx="24" fill="url(#bg)"/>
+  <rect x="0" y="0" width="1280" height="640" fill="url(#dots)"/>
+  <circle cx="1168" cy="140" r="240" fill="#365fcf" opacity=".16" filter="url(#glow)"/>
+  <circle cx="1042" cy="295" r="135" fill="none" stroke="#67bdfa" stroke-opacity=".13" stroke-width="2"/>
+  <circle cx="1042" cy="295" r="92" fill="none" stroke="#67bdfa" stroke-opacity=".19" stroke-width="2" stroke-dasharray="10 14"/>
+  <circle cx="1042" cy="295" r="45" fill="none" stroke="#6adcc9" stroke-opacity=".28" stroke-width="2"/>
+  <path d="M1042 238V265M1042 326V353M985 295H1012M1072 295H1099" stroke="#67dcd0" stroke-width="4" stroke-linecap="round" opacity=".65"/>
+  <circle cx="1042" cy="295" r="9" fill="#80e2cf"/>
+  <rect x="70" y="64" width="282" height="34" rx="17" fill="#21465a" stroke="#387c89" stroke-opacity=".6"/>
+  <circle cx="88" cy="81" r="5" fill="#65e5ce"/>
+  <text x="103" y="86" fill="#d7fff4" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="14" letter-spacing="2.6">OPEN RESEARCH REFERENCE</text>
+  <text x="70" y="207" font-family="Arial, Helvetica, sans-serif" font-weight="800" font-size="71" fill="#ffffff">Awesome</text>
+  <text x="70" y="295" font-family="Arial, Helvetica, sans-serif" font-weight="800" font-size="84" fill="url(#type)">Agent Recovery</text>
+  <text x="73" y="349" font-family="Arial, Helvetica, sans-serif" font-weight="400" font-size="25" fill="#b7cfe5">From failing tool calls to verified recovery.</text>
+  <text x="73" y="387" font-family="Arial, Helvetica, sans-serif" font-weight="400" font-size="18" fill="#88adc9">Research papers  ·  Benchmarks  ·  Frameworks  ·  Engineering playbooks</text>
+  <rect x="70" y="440" width="1140" height="125" rx="23" fill="#081a2c" stroke="#356080" stroke-opacity=".85" stroke-width="1.5"/>
+  <path d="M182 487H1092" stroke="#376580" stroke-width="5" stroke-linecap="round"/>
+  <path d="M182 487H1092" stroke="url(#line)" stroke-width="4" stroke-linecap="round"/>
+  <g font-family="Arial, Helvetica, sans-serif" text-anchor="middle" font-weight="700">
+    <circle cx="183" cy="487" r="22" fill="#123e43" stroke="#66e1c7" stroke-width="4"/><text x="183" y="493" font-size="16" fill="#ccffef">1</text><text x="183" y="543" font-size="16" fill="#d9eee9">DETECT</text>
+    <circle cx="410" cy="487" r="22" fill="#163b54" stroke="#78d2e7" stroke-width="4"/><text x="410" y="493" font-size="16" fill="#e2fcff">2</text><text x="410" y="543" font-size="16" fill="#dceefa">DIAGNOSE</text>
+    <circle cx="638" cy="487" r="22" fill="#1b365a" stroke="#78bafa" stroke-width="4"/><text x="638" y="493" font-size="16" fill="#e2eeff">3</text><text x="638" y="543" font-size="16" fill="#dceafa">RECOVER</text>
+    <circle cx="865" cy="487" r="22" fill="#292f56" stroke="#9eb1ff" stroke-width="4"/><text x="865" y="493" font-size="16" fill="#edf0ff">4</text><text x="865" y="543" font-size="16" fill="#e5e7ff">VERIFY</text>
+    <circle cx="1091" cy="487" r="22" fill="#332f58" stroke="#b5a6ff" stroke-width="4"/><text x="1091" y="493" font-size="16" fill="#f4ebff">5</text><text x="1091" y="543" font-size="16" fill="#eee6ff">RESUME</text>
+  </g>
+  <text x="70" y="607" font-family="Arial, Helvetica, sans-serif" font-size="15" letter-spacing="1.1" fill="#86a6bc">GITHUB.COM/MOHAMMADASADOLAHI/AWESOME-AGENT-RECOVERY</text>
+</svg>
