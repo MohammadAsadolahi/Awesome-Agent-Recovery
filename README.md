@@ -1,7 +1,9 @@
 # Awesome Agent Recovery 🛟
 
+[![Awesome](https://awesome.re/badge-flat.svg)](https://awesome.re)
+
 [![Quality checks](https://github.com/MohammadAsadolahi/Awesome-Agent-Recovery/actions/workflows/quality.yml/badge.svg)](https://github.com/MohammadAsadolahi/Awesome-Agent-Recovery/actions/workflows/quality.yml)
-[![Research index](https://img.shields.io/badge/curated_resources-36-2563eb)](data/resources.csv)
+[![Research index](https://img.shields.io/badge/curated_resources-44-2563eb)](data/resources.csv)
 [![License: CC0 1.0](https://img.shields.io/badge/metadata_license-CC0--1.0-16a34a)](LICENSE)
 [![Contributions welcome](https://img.shields.io/badge/contributions-welcome-8b5cf6)](CONTRIBUTING.md)
 
@@ -24,9 +26,9 @@
 
 This repository focuses on **verified recovery after failure** rather than general-purpose agent orchestration, observability, or prompt engineering. A recovery strategy is only successful when the relevant state is correct—not merely when an LLM says the task succeeded.
 
-**Quick start:** If you have a concrete failure, use [Find a recovery strategy](#find-a-recovery-strategy). To compare research, start with [recent papers](#start-here). To make a production workflow resilient, open the [engineering field guide](docs/field-guide.md).
+**Quick start:** Have a concrete failure? Use [Find a recovery strategy](#find-a-recovery-strategy). Comparing research? See [Start here](#start-here) or [Benchmarks](#benchmarks-and-evaluation). Operating an agent in production? See the [field guide](docs/field-guide.md). New to this repository? [Browse the documentation by task](docs/README.md).
 
-**Last curated review:** 28 October 2026. Paper results are reported by their authors unless independently reproduced. The included code example is a simulator, not a production transaction service.
+**Last curated review:** 29 October 2026. Paper results are reported by their authors unless independently reproduced. The included code example is a simulator, not a production transaction service.
 
 ## Contents
 
@@ -34,6 +36,7 @@ This repository focuses on **verified recovery after failure** rather than gener
 - [Start here](#start-here)
 - [Find a recovery strategy](#find-a-recovery-strategy)
 - [Research papers](#research-papers)
+- [Browse by research question](#browse-by-research-question)
 - [Benchmarks and evaluation](#benchmarks-and-evaluation)
 - [Production systems and implementation guides](#production-systems-and-implementation-guides)
 - [Try a failure-injection example](#try-a-failure-injection-example)
@@ -54,6 +57,8 @@ Five recent papers frame the field:
 | [Sentry](https://arxiv.org/abs/2610.02994) | Can an external monitor deliver a relevant lesson only when a failure occurs? | Oct 2026 |
 | [Locating Hidden Failures / Traverse](https://arxiv.org/abs/2609.17930) | Can we detect the *first* error in a long trajectory, not just final task failure? | Sep 2026 |
 
+**New research review (29 October):** [Eight additions with source checks, exclusions, and open gaps](docs/research-update-2026-10-29.md), including AgentDebugX, AgentRx, CUADebug, TRAJDEBUG, PROBE, AgentChaosBench, Agent Error Simulator and Agent Error Dataset.
+
 **Evidence snapshot (authors' reported results, not independently reproduced):** ReInBench contains **1,259 traces / 1,403 errors**; CUA-Recovery has **2,250 erroneous evaluation states**; Traverse analyzes **2,518 trajectories / 6,967 mistakes**. These measure different tasks and should **not** be compared as a leaderboard.
 
 ## Find a recovery strategy
@@ -70,6 +75,16 @@ Five recent papers frame the field:
 | Multiple agents contaminate a shared state | [DoVer](https://arxiv.org/abs/2512.06749), [counterfactual replay](https://arxiv.org/abs/2608.29228) | Isolate the defect and test repairs; one bad message may not be the sole cause |
 | The agent might recover without intervention | [ReCoF](https://arxiv.org/abs/2610.36471) | Compare intervention cost against likelihood of self-recovery |
 | An effect cannot be safely undone | [Recovery field guide](docs/field-guide.md) | Stop or escalate; *safe abstention* can be the correct result |
+
+### Browse by research question
+
+| Question | Evidence to start with |
+| --- | --- |
+| Where did the **causal error** first occur? | [Traverse](https://arxiv.org/abs/2609.17930), [AgentRx](https://aclanthology.org/2026.findings-emnlp.598/), [TRAJDEBUG](https://aclanthology.org/2026.findings-emnlp.437/) |
+| Can the diagnosis produce a **verified repaired rerun**? | [AgentDebugX](https://aclanthology.org/2026.emnlp-demos.52/), [CUADebug](https://aclanthology.org/2026.findings-emnlp.530/), [PROBE](https://arxiv.org/abs/2605.08717) |
+| How do agents behave under **injected runtime faults**? | [ToolMaze](https://arxiv.org/abs/2606.05806), [AgentChaosBench](https://arxiv.org/abs/2608.14680), [Agent Error Simulator](https://grc.iit.edu/publications/bateman-2026-agent-error-simulator-3c7d/) |
+| Can failed runs teach a **better next action**? | [Sentry](https://arxiv.org/abs/2610.02994), [Agent Error Dataset](https://arxiv.org/abs/2609.40111) |
+| What can really be **restored or safely repeated**? | [AgentRewind](https://arxiv.org/abs/2608.14380), [Crab](https://arxiv.org/abs/2604.28138), [field guide](docs/field-guide.md) |
 
 ### The agent recovery decision flow
 
@@ -103,6 +118,11 @@ See the [field guide](docs/field-guide.md) for the failure-class decision tree a
 
 ### Failure detection, localization, and diagnosis
 
+- [AgentRx: Diagnosing AI Agent Failures from Execution Trajectories](https://aclanthology.org/2026.findings-emnlp.598/) (2026) — Synthesizes auditable step constraints and violation evidence for first critical-error localization. [Code](https://github.com/microsoft/AgentRx).
+- [TRAJDEBUG: Tracing Error Lifecycle](https://aclanthology.org/2026.findings-emnlp.437/) (2026) — Tracks which early errors persist and contribute to failure; TrajErrBench. [Code](https://github.com/THU-KEG/TrajDebug).
+- [AgentDebugX: Failure Observability, Attribution, and Recovery](https://aclanthology.org/2026.emnlp-demos.52/) (2026) — Detect → attribute → recover → rerun with evidence and bounded recovery proposals. [Code](https://github.com/AgentDebugX/AgentDebugX).
+- [CUADebug: Diagnosing and Repairing Computer-Use Agent Failures](https://aclanthology.org/2026.findings-emnlp.530/) (2026) — Visual, action-grounded root-cause analysis and controlled GUI rerolls. [Project](https://cuadebug.github.io/).
+
 - [Locating Hidden Failures Makes Long-Horizon Agents More Reliable](https://arxiv.org/abs/2609.17930) (2026) — Traverse dataset and Scout verifier for first-error localization.
 - [Real-Time Detection and Repair of LLM Agent Failures](https://arxiv.org/abs/2608.02464) (2026) — Lightweight step telemetry and deterministic verification leading to repair attempts.
 - [Localizing Emergent Failures in Agentic AI](https://arxiv.org/abs/2608.29228) (2026) — Graph-constrained counterfactual replay to find minimal families of interventions.
@@ -110,6 +130,9 @@ See the [field guide](docs/field-guide.md) for the failure-class decision tree a
 - [A Survey for LLM Agent Trajectory Analysis](https://doi.org/10.1109/TSE.2026.3717765) (2026) — Broader survey of trajectory attribution, debugging, monitoring, and improvement.
 
 ### Tool failures, intervention, and self-recovery
+
+- [Debugging the Debuggers / PROBE](https://arxiv.org/abs/2605.08717) (2026) — Turns engineering-agent telemetry into bounded, evidence-gated guidance; recovery is separately measured.
+- [Agent Error Dataset / AET](https://arxiv.org/abs/2609.40111) (2026 preprint) — 50,228 author-reported error–diagnosis pairs and matched replay-based correction checks.
 
 - [When Tools Fail: Benchmarking Dynamic Replanning and Anomaly Recovery in LLM Agents](https://arxiv.org/abs/2606.05806) (2026) — ToolMaze; explicit/implicit and transient/permanent tool perturbations. [Code](https://github.com/Zhudongsheng75/ToolMaze).
 - [When to Intervene? An Empirical Study of Errors and Self-Recovery in LLM Agents](https://arxiv.org/abs/2610.36471) (2026) — ReInBench / ReCoF; avoiding unnecessary interventions. [Project](https://method-notes.github.io/ReCoF/).
@@ -131,6 +154,8 @@ See the [field guide](docs/field-guide.md) for the failure-class decision tree a
 - [ReAct: Synergizing Reasoning and Acting in Language Models](https://arxiv.org/abs/2210.03629) (2022) — Foundational reasoning-and-tool-use loop.
 
 ## Benchmarks and evaluation
+
+**Fault-injection and diagnosis additions:** [AgentChaosBench](https://arxiv.org/abs/2608.14680) studies MCP, A2A and guardrail runtime faults across aligned execution traces; [Agent Error Simulator](https://grc.iit.edu/publications/bateman-2026-agent-error-simulator-3c7d/) injects declarative format, logic and tool-call faults into a hierarchical workflow. Both are useful for designing failure tests; **neither alone demonstrates safe restoration of external state**.
 
 | Benchmark / study | What it probes | Important caution |
 | --- | --- | --- |
@@ -171,6 +196,8 @@ Expected simulation: blind retry causes **2** writes, whereas reconciliation wit
 
 ## Engineering reference
 
+- [Documentation index: start by task](docs/README.md)
+- [29 October research review and Awesome-list design decisions](docs/research-update-2026-10-29.md)
 - [Recovery field guide and decision tree](docs/field-guide.md)
 - [Benchmarking and failure-injection guide](docs/benchmarks.md)
 - [Recovery infrastructure comparison](docs/production-systems.md)
