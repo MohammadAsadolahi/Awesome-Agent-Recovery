@@ -22,6 +22,14 @@ Do not equate an arXiv abstract with peer review, a project page with released c
 
 The canonical abstracts of [ReInBench](https://arxiv.org/abs/2610.36471), [CUA-Recovery](https://arxiv.org/abs/2610.27645), [RegretBench](https://arxiv.org/abs/2610.28934), [Sentry](https://arxiv.org/abs/2610.02994), [Traverse](https://arxiv.org/abs/2609.17930), [AgentRewind](https://arxiv.org/abs/2608.14380), [ToolMaze](https://arxiv.org/abs/2606.05806), and [Crab](https://arxiv.org/abs/2604.28138) were checked against the respective primary arXiv pages on 2026-10-28. Broader entries are curated links, not claims of independent reproduction.
 
+## Recovery evidence: state boundaries and uncertainty
+
+A source can be in scope even if it only evaluates **detection or attribution**, but it must be labeled accordingly. A defensible recovery claim should distinguish (1) detection, (2) causal localization, (3) repair proposal, (4) rerun result, (5) externally verified postconditions and (6) unintended side effects. See [benchmarks](benchmarks.md).
+
+**Ambiguous effect caveat:** an empty read-back is not sufficient evidence of safe retry when a write remains in flight; [LIMBO](https://arxiv.org/abs/2609.29095) studies this explicitly. Durable execution does not provide exactly-once external writes without a suitable external contract.
+
+**Version caveat:** use primary proceedings when available. For a source available only through an OpenReview submission or arXiv, label it a submission/preprint without assuming formal acceptance.
+
 ## How this differs from existing lists
 
 Broader collections on [agent reliability](https://github.com/swarmproof/awesome-agent-reliability), [agent trajectories](https://github.com/YintongHuo/awesome-agent-trajectory) and [agent harnesses](https://github.com/Gloriaameng/Awesome-Agent-Harness) overlap with the field. This collection prioritizes **failure mode → evidence → recovery action → independent verification**.
@@ -37,4 +45,4 @@ Inspired by major curated lists such as [Awesome](https://github.com/sindresorhu
 - Use publisher and original project pages; do not copy third-party text, imagery, badges other than reusable public Awesome badge, or project logos.
 - Track why entries were selected and what was *not* selected in dated reviews. Prefer small substantive updates over speculative claims.
 
-The [29 October review](research-update-2026-10-29.md) records the current additions and editorial trade-offs. The [documentation index](README.md) maps tasks to guides.
+The [29 October transactional-recovery review](research-update-2026-10-29-transactional.md) and [diagnostics review](research-update-2026-10-29.md) record the current additions and editorial trade-offs. The [documentation index](README.md) maps tasks to guides.
