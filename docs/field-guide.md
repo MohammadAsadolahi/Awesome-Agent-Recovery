@@ -1,6 +1,6 @@
 # Agent Recovery: Field Guide
 
-_Updated 2026-10-28. Engineering synthesis; not a production-safety certification._
+_Updated 2026-10-29. Engineering synthesis; not a production-safety certification._
 
 ## Recovery starts with external truth
 
@@ -42,6 +42,10 @@ Try the [offline example](../examples/ambiguous_write_demo.py).
 - **Duplicate side effects:** repeated remote mutations, ideally zero.
 - **Collateral damage:** irreversible or unintended changes even in runs marked successful.
 - **Safe stop:** appropriate human escalation/abstention on high-risk ambiguous actions.
+
+## Diagnosis is not recovery
+
+Methods such as [AgentRx](https://aclanthology.org/2026.findings-emnlp.598/) and [TRAJDEBUG](https://aclanthology.org/2026.findings-emnlp.437/) can identify a likely critical fault, but this alone does not repair real state. [AgentDebugX](https://aclanthology.org/2026.emnlp-demos.52/), [CUADebug](https://aclanthology.org/2026.findings-emnlp.530/) and [PROBE](https://arxiv.org/abs/2605.08717) investigate how grounded diagnosis informs a controlled second attempt. Before any rerun: preserve an operation key, determine which effects already committed, choose a valid checkpoint, constrain the next action and independently verify its effects. If these conditions cannot be met, escalate.
 
 ## Failure-injection checklist
 

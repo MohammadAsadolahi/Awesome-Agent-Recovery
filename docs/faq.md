@@ -1,6 +1,6 @@
 # AI Agent Recovery: Frequently Asked Questions
 
-_Updated 28 October 2026. Answers synthesize the cited resources; check primary publications for specific experimental claims._
+_Updated 29 October 2026. Answers synthesize the cited resources; check primary publications for specific experimental claims._
 
 ## What is AI agent failure recovery?
 
@@ -33,6 +33,10 @@ Consider human review when the outcome is unknown, a potentially irreversible ac
 ## Which benchmarks evaluate LLM agent recovery?
 
 [CUA-Recovery](https://arxiv.org/abs/2610.27645) examines inherited desktop errors; [ToolMaze](https://arxiv.org/abs/2606.05806) focuses on tool failures; [ReInBench](https://arxiv.org/abs/2610.36471) covers intervention and self-recovery; [RegretBench](https://arxiv.org/abs/2610.28934) considers backup awareness; [MettleBench](https://arxiv.org/abs/2608.14380) evaluates selected long-horizon rewind tasks. Their measures are not directly comparable.
+
+## Does a good root-cause diagnosis prove the agent has recovered?
+
+No. [AgentRx](https://aclanthology.org/2026.findings-emnlp.598/) and [TRAJDEBUG](https://aclanthology.org/2026.findings-emnlp.437/) evaluate error localization, whereas [AgentDebugX](https://aclanthology.org/2026.emnlp-demos.52/) and [CUADebug](https://aclanthology.org/2026.findings-emnlp.530/) also study controlled recovery reruns. Independent verification of real external effects remains necessary. See [evaluation levels](benchmarks.md#evaluation-taxonomy-do-not-collapse-distinct-success-measures).
 
 ## Which libraries help build durable AI agents?
 

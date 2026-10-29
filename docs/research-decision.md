@@ -1,6 +1,6 @@
 # Scope, Curation and Evidence Policy
 
-_Reviewed 2026-10-28._
+_Reviewed 2026-10-29._
 
 ## Scope
 
@@ -27,3 +27,14 @@ The canonical abstracts of [ReInBench](https://arxiv.org/abs/2610.36471), [CUA-R
 Broader collections on [agent reliability](https://github.com/swarmproof/awesome-agent-reliability), [agent trajectories](https://github.com/YintongHuo/awesome-agent-trajectory) and [agent harnesses](https://github.com/Gloriaameng/Awesome-Agent-Harness) overlap with the field. This collection prioritizes **failure mode → evidence → recovery action → independent verification**.
 
 The value should come from traceable sources, useful decision aids, and tested examples—not inflating the paper count.
+## Organization and maintenance conventions
+
+Inspired by major curated lists such as [Awesome](https://github.com/sindresorhus/awesome), [Awesome Python](https://github.com/vinta/awesome-python), [Awesome Selfhosted](https://github.com/awesome-selfhosted/awesome-selfhosted), and [Papers We Love](https://github.com/papers-we-love/papers-we-love):
+
+- Provide quick orientation, a topic-based table of contents, and succinct consistent annotations rather than an undifferentiated dump.
+- Keep **one canonical CSV metadata source** and generate JSON; organize the README by recovery mechanism and task, not only chronology.
+- Apply quality-over-quantity admission criteria, source provenance, explicit limitations, duplicate checks, and a concise contributor checklist.
+- Use publisher and original project pages; do not copy third-party text, imagery, badges other than reusable public Awesome badge, or project logos.
+- Track why entries were selected and what was *not* selected in dated reviews. Prefer small substantive updates over speculative claims.
+
+The [29 October review](research-update-2026-10-29.md) records the current additions and editorial trade-offs. The [documentation index](README.md) maps tasks to guides.
