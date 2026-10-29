@@ -48,6 +48,66 @@
     "note": "Check code release state."
   },
   {
+    "id": "agentdebugx",
+    "kind": "paper",
+    "area": "Failure diagnosis",
+    "title": "AgentDebugX: An Open-Source Toolkit for Failure Observability, Attribution, and Recovery in LLM Agents",
+    "year": 2026,
+    "date": "2026-10",
+    "url": "https://aclanthology.org/2026.emnlp-demos.52/",
+    "why": "Links evidence-grounded failure diagnosis to bounded recovery proposals and controlled reruns.",
+    "code": "https://github.com/AgentDebugX/AgentDebugX",
+    "note": "EMNLP 2026 System Demonstrations; GAIA rerun results are author-reported and need a controlled environment."
+  },
+  {
+    "id": "agentrx",
+    "kind": "paper",
+    "area": "Failure diagnosis",
+    "title": "AgentRx: Diagnosing AI Agent Failures from Execution Trajectories",
+    "year": 2026,
+    "date": "2026-10",
+    "url": "https://aclanthology.org/2026.findings-emnlp.598/",
+    "why": "Synthesizes per-step constraints and auditable violation logs to localize critical failure steps.",
+    "code": "https://github.com/microsoft/AgentRx",
+    "note": "EMNLP 2026 Findings; 170 annotated trajectories in final ACL version (earlier Microsoft materials mention 115); diagnosis only."
+  },
+  {
+    "id": "cuadebug",
+    "kind": "paper",
+    "area": "Failure diagnosis",
+    "title": "CUADebug: Diagnosing and Repairing Computer-Use Agent Failures",
+    "year": 2026,
+    "date": "2026-10",
+    "url": "https://aclanthology.org/2026.findings-emnlp.530/",
+    "why": "Inspects paired screenshots and actions for causal GUI errors and conditions re-execution on structured diagnosis.",
+    "code": "https://cuadebug.github.io/",
+    "note": "EMNLP 2026 Findings; CUAErrorBench has 204 annotated failures; rerollout results depend on controlled restart settings."
+  },
+  {
+    "id": "trajdebug",
+    "kind": "paper",
+    "area": "Failure diagnosis",
+    "title": "TRAJDEBUG: Tracing Error Lifecycle to Identify Critical Failures in Long-Horizon Agent Trajectories",
+    "year": 2026,
+    "date": "2026-10",
+    "url": "https://aclanthology.org/2026.findings-emnlp.437/",
+    "why": "Separates initially wrong decisions from resolved errors and terminally relevant causal failures in long traces.",
+    "code": "https://github.com/THU-KEG/TrajDebug",
+    "note": "EMNLP 2026 Findings; TrajErrBench reports 486 annotated failed trajectories; step localization is not rollback."
+  },
+  {
+    "id": "agent-error-dataset",
+    "kind": "paper",
+    "area": "Recovery benchmark",
+    "title": "Agent Error Dataset: Scaling 50,000 Error--Diagnosis Pairs for Failure Analysis and Error-Aware Post-Training",
+    "year": 2026,
+    "date": "2026-09-30",
+    "url": "https://arxiv.org/abs/2609.40111",
+    "why": "Pairs error diagnoses with candidate corrections and matched replay from common checkpoints when available.",
+    "code": "",
+    "note": "2026 arXiv preprint; 50228 pairs and 3062 matched reruns are author-reported; resettable environments only."
+  },
+  {
     "id": "traverse",
     "kind": "paper",
     "area": "Failure diagnosis",
@@ -96,6 +156,18 @@
     "note": ""
   },
   {
+    "id": "agent-error-simulator",
+    "kind": "paper",
+    "area": "Recovery benchmark",
+    "title": "Agent Error Simulator: Fault Injection for Testing Recovery in Agentic Workflows",
+    "year": 2026,
+    "date": "2026-09",
+    "url": "https://grc.iit.edu/publications/bateman-2026-agent-error-simulator-3c7d/",
+    "why": "Declarative proxy fault injection probes format logic and tool failures across planner worker and aggregator roles.",
+    "code": "https://github.com/Keith-Bateman/agent-error-simulator",
+    "note": "IEEE eScience 2026; results from an example hierarchical workflow and HPC-centric setup, not broad agent robustness."
+  },
+  {
     "id": "emergent-repair",
     "kind": "paper",
     "area": "Failure diagnosis",
@@ -118,6 +190,18 @@
     "why": "Aligns agent-context and environment-state checkpoints for resumable execution.",
     "code": "",
     "note": ""
+  },
+  {
+    "id": "agentchaosbench",
+    "kind": "paper",
+    "area": "Recovery benchmark",
+    "title": "When Agentic Executions Fail: Detecting and Localizing Runtime Faults from Telemetry",
+    "year": 2026,
+    "date": "2026-08-04",
+    "url": "https://arxiv.org/abs/2608.14680",
+    "why": "AgentChaosBench injects MCP A2A guardrail and tool faults and evaluates fault localization from aligned execution traces.",
+    "code": "https://github.com/kevinzck8k/agentic-fault-diagnosis",
+    "note": "2026 arXiv preprint; 275 traces (250 faulty and 25 control); measures diagnosis, not verified task recovery."
   },
   {
     "id": "real-time-repair",
@@ -154,6 +238,18 @@
     "why": "ToolMaze tests explicit or implicit transient or permanent tool perturbations.",
     "code": "https://github.com/Zhudongsheng75/ToolMaze",
     "note": ""
+  },
+  {
+    "id": "probe-structured-recovery",
+    "kind": "paper",
+    "area": "Self-recovery",
+    "title": "Debugging the Debuggers: Failure-Anchored Structured Recovery for Software Engineering Agents",
+    "year": 2026,
+    "date": "2026-05-09",
+    "url": "https://arxiv.org/abs/2605.08717",
+    "why": "PROBE gates recovery guidance on structured telemetry and grounded diagnosis for subsequent repair attempts.",
+    "code": "",
+    "note": "ASE 2026 paper; 257 initially unresolved cases and outcomes reported by authors; diagnosis does not itself guarantee recovery."
   },
   {
     "id": "crab",
