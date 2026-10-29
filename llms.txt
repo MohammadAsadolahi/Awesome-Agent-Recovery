@@ -17,6 +17,7 @@ Updated: 2026-10-29
 - [Source index (CSV)](https://raw.githubusercontent.com/MohammadAsadolahi/Awesome-Agent-Recovery/main/data/resources.csv): Same index for spreadsheet or ingestion workflows.
 
 - [Docs navigation and directory](https://raw.githubusercontent.com/MohammadAsadolahi/Awesome-Agent-Recovery/main/docs/README.md): Task-based entrypoints for research, benchmarking and implementation.
+- [Transactional recovery and benchmarks, 2026-10-29](https://raw.githubusercontent.com/MohammadAsadolahi/Awesome-Agent-Recovery/main/docs/research-update-2026-10-29-transactional.md): 22 newly curated sources on effect correctness, fault injection, repair and secure resumption.
 - [Research review, 2026-10-29](https://raw.githubusercontent.com/MohammadAsadolahi/Awesome-Agent-Recovery/main/docs/research-update-2026-10-29.md): New primary sources, selection methodology and benchmark limits.
 
 ## Optional
@@ -26,4 +27,4 @@ Updated: 2026-10-29
 
 ## Evidence and interpretation
 
-The index is curated; it does not provide independent replication for all papers, and it is not a global benchmark leaderboard. For paper-specific factual claims, cite the canonical paper rather than treating this curated summary as independent experimental evidence. External writes are not automatically reversible just because a runtime can resume workflows. llms.txt is an optional discovery aid, not a guarantee of indexing or recommendations by AI assistants.
+The catalog contains 66 curated resources as of 2026-10-29. The index is curated; it does not provide independent replication for all papers, and it is not a global benchmark leaderboard. For paper-specific factual claims, cite the canonical paper rather than treating this curated summary as independent experimental evidence. External writes are not automatically reversible just because a runtime can resume workflows. llms.txt is an optional discovery aid, not a guarantee of indexing or recommendations by AI assistants.

@@ -25,6 +25,14 @@ A language model can recover its conversation while the actual state of a filesy
 6. **Verify:** inspect actual state, duplicates, collateral effects, and task success before continuing.
 7. **Resume or stop safely:** enforce retry and intervention budgets; log why recovery was chosen.
 
+## The in-flight commit trap
+
+**A read-back that returns “absent” is not enough on its own.** The first write may still be executing and can commit after the read-back and a second write. [LIMBO](https://arxiv.org/abs/2609.29095) distinguishes lost acknowledgments from late commits and transport redelivery. If a tool lacks idempotency, conditional writes or a queryable *terminal* status (with documented consistency/in-flight bounds), safe automatic repetition may be impossible.
+
+For multi-step operations, use a stable business-operation ID propagated to each write, record which subeffects committed, and make the **retry/compensation boundary explicit**. [SagaLLM](https://doi.org/10.14778/3750601.3750611), [Atomix](https://arxiv.org/abs/2602.14849), [RAC](https://arxiv.org/abs/2605.03409) and [DelAct](https://doi.org/10.1109/IWQoS70441.2026.11661202) investigate different transaction and settlement mechanisms, but each requires tool-contract assumptions. Compensation can itself fail, have fees, or leave visible residual effects.
+
+Where possible, compare *expected authorized effects* with actual persistent effects before continuing: [EffectMatch](https://arxiv.org/abs/2609.31301) investigates this in a controlled execution boundary. Log the effect history as well as the final success claim.
+
 ## Example: lost response after committed write
 
 An agent creates an invoice. The remote API commits it, but the network drops the response. Retrying the same create call might create a second invoice.
@@ -60,4 +68,4 @@ Methods such as [AgentRx](https://aclanthology.org/2026.findings-emnlp.598/) and
 | Overwritten files | Restore snapshot, run checks |
 | Irreversible uncertain effect | Stop or escalate |
 
-See [benchmarks](benchmarks.md) and [production systems](production-systems.md).
+See [benchmarks](benchmarks.md), [production systems](production-systems.md) and the [transactional recovery research review](research-update-2026-10-29-transactional.md).

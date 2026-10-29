@@ -4,8 +4,18 @@ _Updated 2026-10-29. Numbers below are as reported by authors, not independently
 
 ## Recovery-specific benchmarks
 
+**Compare only matched failure phases and denominators.** A diagnosis score does not imply a safe retry; nominal task success does not imply recovery from injected faults.
+
 | Benchmark | Paper | Target failure | Caution |
 | --- | --- | --- | --- |
+| LIMBO | [Where Does Exactly-Once Live?](https://arxiv.org/abs/2609.29095) | 25,930 author-reported episodes across service contracts, late commits and duplicate delivery | Tracks real effect ledger in sandbox; does not establish generic exactly-once |
+| UndoBench | [Separating Task Competence from Recovery](https://arxiv.org/abs/2610.05622) | 2,880 paired lost-ACK trials in the authors' frozen study; pre/during/post-mutation scenarios | Report conditional recovery and duplicate effects separately from nominal task completion |
+| GUI-RobustEval | [Recovering Policy-Induced Errors](https://proceedings.mlr.press/v306/bu26b.html) | 1,216 executable GUI recovery cases | Controlled GUI environment; not remote transaction reversal |
+| ToolMisuseBench | [Offline Deterministic Tool Misuse and Recovery](https://aclanthology.org/2026.realm-1.28/) | 1,200 public-test cases in seed-42 release | Frozen offline faults and tool contracts |
+| ParaRecover | [Parallel Tool-Use Recovery](https://aclanthology.org/2026.emnlp-main.975/) | 10,626 process-level instances and 14 error types | Error localization and replanning, not distributed atomicity |
+| BENCH2ROBUST | [Retry, Switch, or Abstain?](https://arxiv.org/abs/2608.11977) | Scenario-controlled solvability and recovery policy | Synthetic tool faults; explicitly include safe stop |
+| Recovery-Bench | [Evaluating Agentic Recovery from Mistakes](https://openreview.net/forum?id=8FZRnDgDxq) | Recovery from polluted context and inherited failure trajectories | OpenReview submission; publication/acceptance status not verified |
+| EpiSEM-Bench | [Evidence Recovery under Missing Evidence](https://arxiv.org/abs/2610.31650) | 300 matched unsafe/safe task pairs, author-reported | Safety evidence acquisition, not external state restore |
 | AgentChaosBench | [When Agentic Executions Fail](https://arxiv.org/abs/2608.14680) | 275 sanitized traces; 10 types of MCP/A2A/guardrail faults and no-fault controls | Fault-type and location detection, **not** completed recovery |
 | Agent Error Simulator | [Fault Injection for Testing Recovery](https://grc.iit.edu/publications/bateman-2026-agent-error-simulator-3c7d/) | Declarative format, logic and tool-call faults in hierarchical workflows | Domain-specific jobs and HPC setup; not a universal leaderboard |
 | TrajErrBench | [TRAJDEBUG](https://aclanthology.org/2026.findings-emnlp.437/) | 486 annotated failed trajectories; error lifecycle | Attribution is not state restoration |
@@ -21,6 +31,16 @@ _Updated 2026-10-29. Numbers below are as reported by authors, not independently
 
 No results above constitute a cross-benchmark leaderboard.
 
+## Side-effect correctness and the recovery denominator
+
+In addition to ordinary completion, record **whether the same task would succeed without the injected fault**. [UndoBench](https://arxiv.org/abs/2610.05622) formalizes conditional recovery success among paired nominally capable cases. Report duplicate-effect rate, missing-effect rate and authoritative postconditions as separate columns.
+
+Failure phase matters: `PRE_MUTATION`, `DURING_MUTATION`, and `POST_MUTATION_PRE_ACK` can have different recovery possibilities. Include delayed in-flight commits, response loss, redelivery and partial batch commits where the tool contract permits controlled injection.
+
+[LIMBO](https://arxiv.org/abs/2609.29095) shows that an empty immediate read-back does not prove an earlier timed-out call cannot still commit. Use stable operation keys, conditional writes or a terminal-status contract when the downstream API offers them; otherwise account for unresolved uncertainty and safe stop.
+
+[Same Winners, Different Success Rates](https://arxiv.org/abs/2609.34215) demonstrates that high checkpoint action-ranking agreement can coexist with near-zero absolute success. Report agreement, all-zero fraction, held-out success and pooled success together when evaluating checkpoint policies.
+
 ## Minimum experiment record
 
 Report the task/environment; exact injected or observed failure; agent and model version; the no-recovery and plain-retry baselines; number of runs; the success verifier; side effects; error-awareness measure; recovery latency/cost; and reproducibility details such as scripts, seeds, code commits and data licenses.
@@ -33,6 +53,7 @@ Report the task/environment; exact injected or observed failure; agent and model
 - **Future work:** process crash at step boundary, partial batch success, a plausible-but-wrong tool result, and corrupted sandbox state.
 
 Do not label future scenarios implemented before their tests exist.
+
 ## Evaluation taxonomy: do not collapse distinct success measures
 
 | Level | Metric | Necessary evidence |
@@ -43,4 +64,4 @@ Do not label future scenarios implemented before their tests exist.
 | 4. Execute | Successful rerun after recovery attempt | Controlled restart and no-recovery baseline |
 | 5. Verify | Correct external state, no duplicate/irreversible collateral effects | Independent authoritative checks and side-effect ledger |
 
-An improved diagnosis score does **not** imply improved safe recovery. Report the **denominator** for recovery (failed cases vs all tasks), whether the restart point is human-labeled or predicted, and whether the environment is resettable. See the [research review](research-update-2026-10-29.md) for paper-specific caveats.
+An improved diagnosis score does **not** imply improved safe recovery. Report the **denominator** for recovery (failed cases vs all tasks), whether the restart point is human-labeled or predicted, and whether the environment is resettable. See the [transactional recovery research review](research-update-2026-10-29-transactional.md) and [earlier diagnostics review](research-update-2026-10-29.md) for paper-specific caveats.

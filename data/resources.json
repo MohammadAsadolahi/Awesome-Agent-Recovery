@@ -12,16 +12,16 @@
     "note": "Very recent preprint."
   },
   {
-    "id": "cua-recovery",
+    "id": "episem",
     "kind": "paper",
     "area": "Recovery benchmark",
-    "title": "CUA-Recovery: Benchmarking Error Recovery in Long-Horizon Computer-Use Agents",
+    "title": "EpiSEM-Bench: Evaluating Safety and Evidence Recovery in LLM Agents under Missing Evidence",
     "year": 2026,
-    "date": "2026-10-20",
-    "url": "https://arxiv.org/abs/2610.27645",
-    "why": "Benchmarks recognition and repair of inherited desktop errors over persistent workflows.",
-    "code": "https://github.com/xu-hu-2002/CUA-Recovery",
-    "note": "Paper reports 2250 test states."
+    "date": "2026-10-22",
+    "url": "https://arxiv.org/abs/2610.31650",
+    "why": "Measures whether agents seek omitted safety-critical facts before taking otherwise dangerous tool actions.",
+    "code": "",
+    "note": "2026 preprint; 300 matched unsafe/safe task pairs. Evidence acquisition is not restoration of external state."
   },
   {
     "id": "backupper",
@@ -36,6 +36,30 @@
     "note": "Does not imply external effects are reversible."
   },
   {
+    "id": "cua-recovery",
+    "kind": "paper",
+    "area": "Recovery benchmark",
+    "title": "CUA-Recovery: Benchmarking Error Recovery in Long-Horizon Computer-Use Agents",
+    "year": 2026,
+    "date": "2026-10-20",
+    "url": "https://arxiv.org/abs/2610.27645",
+    "why": "Benchmarks recognition and repair of inherited desktop errors over persistent workflows.",
+    "code": "https://github.com/xu-hu-2002/CUA-Recovery",
+    "note": "Paper reports 2250 test states."
+  },
+  {
+    "id": "undobench",
+    "kind": "paper",
+    "area": "Recovery benchmark",
+    "title": "UndoBench: Separating Task Competence from Recovery Capability in Tool-Using AI Agents",
+    "year": 2026,
+    "date": "2026-10-04",
+    "url": "https://arxiv.org/abs/2610.05622",
+    "why": "Measures conditional recovery separately from nominal task competence under phased enterprise write failures.",
+    "code": "https://github.com/tradertanmay/undobench",
+    "note": "Preprint; 2,880 paired lost-acknowledgment trials are author-reported. Not evidence of production exactly-once guarantees."
+  },
+  {
     "id": "sentry",
     "kind": "paper",
     "area": "Self-recovery",
@@ -46,6 +70,18 @@
     "why": "Conditionally retrieves failure lessons and verifies repaired execution.",
     "code": "https://github.com/BLIMP-B/sentry",
     "note": "Check code release state."
+  },
+  {
+    "id": "safety-self-improvement",
+    "kind": "paper",
+    "area": "Security recovery",
+    "title": "Safety Must Survive Self-Improvement: Why Failures Persist and How Agents Recover",
+    "year": 2026,
+    "date": "2026-10-01",
+    "url": "https://arxiv.org/abs/2610.01073",
+    "why": "Tests revalidation and validated rollback when self-editing agents retain unsafe executable revisions.",
+    "code": "",
+    "note": "2026 preprint; controlled authorization testbed; safety transfer to unrestricted deployment unproven."
   },
   {
     "id": "agentdebugx",
@@ -84,6 +120,78 @@
     "note": "EMNLP 2026 Findings; CUAErrorBench has 204 annotated failures; rerollout results depend on controlled restart settings."
   },
   {
+    "id": "doctor",
+    "kind": "paper",
+    "area": "Multi-agent containment",
+    "title": "Finding Where the Buck Stops: An Automated Failure Attribution-Based Reflection Framework for Multi-Agent Collaboration",
+    "year": 2026,
+    "date": "2026-10",
+    "url": "https://aclanthology.org/2026.emnlp-main.335/",
+    "why": "DoCtOR targets reflection and correction at the decisive error agent and step instead of the entire team.",
+    "code": "",
+    "note": "EMNLP 2026; reported improvements on question answering and web tasks, not generic multi-service rollback."
+  },
+  {
+    "id": "oracle-state",
+    "kind": "paper",
+    "area": "Failure diagnosis",
+    "title": "Causal Decomposition of LLM Agent Failure via Oracle-State Intervention",
+    "year": 2026,
+    "date": "2026-10",
+    "url": "https://aclanthology.org/2026.realm-1.6/",
+    "why": "Tests whether replacing polluted context with oracle state actually rescues failed long-horizon agents.",
+    "code": "",
+    "note": "REALM 2026 workshop; under 10% recovered after context replacement in stated WebArena default settings."
+  },
+  {
+    "id": "pararecover",
+    "kind": "paper",
+    "area": "Recovery benchmark",
+    "title": "ParaRecover: A Process-Level Benchmark for Error Localization and Recovery in Parallel Tool-Use Agents",
+    "year": 2026,
+    "date": "2026-10",
+    "url": "https://aclanthology.org/2026.emnlp-main.975/",
+    "why": "Evaluates cascading failure diagnosis and replanning across dependent parallel tool-call branches.",
+    "code": "https://github.com/gbw206/ParaRecover",
+    "note": "EMNLP 2026; 10,626 instances and 14 error types are author-reported; no global transaction guarantees."
+  },
+  {
+    "id": "recoveragent",
+    "kind": "paper",
+    "area": "Security recovery",
+    "title": "RecoverAgent: Intent-Preserving Recovery from Indirect Prompt Injection in Tool-using LLM Agents",
+    "year": 2026,
+    "date": "2026-10",
+    "url": "https://aclanthology.org/2026.findings-emnlp.830/",
+    "why": "Rewrites unsafe injected intermediate responses to resume permitted user goals after threat detection.",
+    "code": "",
+    "note": "EMNLP 2026 Findings; tested on prompt-injection benchmarks. Safe continuation still requires tool outcome checks."
+  },
+  {
+    "id": "reskill",
+    "kind": "paper",
+    "area": "Self-recovery",
+    "title": "RESKILL: Explicit Failure Attribution and Structured Repair for Interactive Language Agents",
+    "year": 2026,
+    "date": "2026-10",
+    "url": "https://aclanthology.org/2026.emnlp-main.2024/",
+    "why": "Keeps structured failure hypotheses and retest feedback to choose and revise agent skill repairs.",
+    "code": "",
+    "note": "EMNLP 2026; demonstrated on ALFWorld and TextCraft under fixed repair budgets, not real external writes."
+  },
+  {
+    "id": "toolmisusebench",
+    "kind": "paper",
+    "area": "Recovery benchmark",
+    "title": "ToolMisuseBench: An Offline Deterministic Benchmark for Tool Misuse and Recovery in Agentic Systems",
+    "year": 2026,
+    "date": "2026-10",
+    "url": "https://aclanthology.org/2026.realm-1.28/",
+    "why": "Measures deterministic fault-conditioned recovery with typed recoverability and output-grounded scoring.",
+    "code": "",
+    "note": "REALM 2026 workshop; seed-42 release includes 1,200 public-test tasks; offline evaluation."
+  },
+  {
     "id": "trajdebug",
     "kind": "paper",
     "area": "Failure diagnosis",
@@ -108,16 +216,40 @@
     "note": "2026 arXiv preprint; 50228 pairs and 3062 matched reruns are author-reported; resettable environments only."
   },
   {
-    "id": "traverse",
+    "id": "same-winners",
     "kind": "paper",
-    "area": "Failure diagnosis",
-    "title": "Locating Hidden Failures Makes Long-Horizon Agents More Reliable",
+    "area": "Recovery benchmark",
+    "title": "Same Winners, Different Success Rates: Evaluating How LLM Agents Recover from Failures",
     "year": 2026,
-    "date": "2026-09-15",
-    "url": "https://arxiv.org/abs/2609.17930",
-    "why": "Traverse labels mistakes and Scout predicts first-error locations.",
+    "date": "2026-09-28",
+    "url": "https://arxiv.org/abs/2609.34215",
+    "why": "Shows why agreement on the best checkpoint action can hide uniformly poor absolute recovery success.",
     "code": "",
-    "note": "Authors report 2518 trajectories and 6967 mistakes."
+    "note": "2026 preprint; recommends reporting all-zero fraction and pooled or held-out success alongside agreement."
+  },
+  {
+    "id": "effectmatch",
+    "kind": "paper",
+    "area": "Transactional recovery",
+    "title": "Beyond Approved Actions: Runtime Validation of Persistent Outcomes in Agent Workflows",
+    "year": 2026,
+    "date": "2026-09-25",
+    "url": "https://arxiv.org/abs/2609.31301",
+    "why": "EffectMatch checks observed persistent changes against approved effects before committing or allowing downstream execution.",
+    "code": "",
+    "note": "2026 preprint; guarantees depend on a controlled execution boundary and accurate observation of effects."
+  },
+  {
+    "id": "limbo",
+    "kind": "paper",
+    "area": "Recovery benchmark",
+    "title": "Where Does Exactly-Once Live? Model, Harness, and Tool-Contract Effects on Duplicate Side Effects in LLM Agents",
+    "year": 2026,
+    "date": "2026-09-24",
+    "url": "https://arxiv.org/abs/2609.29095",
+    "why": "LIMBO injects late commits, duplicate delivery and partial batches; effect ledgers expose unsafe retries.",
+    "code": "",
+    "note": "Preprint; 25,930 author-reported episodes. Tool-level idempotency contracts can be necessary where read-back cannot resolve in-flight writes."
   },
   {
     "id": "meshheal",
@@ -156,6 +288,18 @@
     "note": ""
   },
   {
+    "id": "traverse",
+    "kind": "paper",
+    "area": "Failure diagnosis",
+    "title": "Locating Hidden Failures Makes Long-Horizon Agents More Reliable",
+    "year": 2026,
+    "date": "2026-09-15",
+    "url": "https://arxiv.org/abs/2609.17930",
+    "why": "Traverse labels mistakes and Scout predicts first-error locations.",
+    "code": "",
+    "note": "Authors report 2518 trajectories and 6967 mistakes."
+  },
+  {
     "id": "agent-error-simulator",
     "kind": "paper",
     "area": "Recovery benchmark",
@@ -192,6 +336,18 @@
     "note": ""
   },
   {
+    "id": "bench2robust",
+    "kind": "paper",
+    "area": "Tool failure",
+    "title": "Retry, Switch, or Abstain? Learning Strategy-Aware Tool-Use Policies via Controlled Error Injection",
+    "year": 2026,
+    "date": "2026-08-12",
+    "url": "https://arxiv.org/abs/2608.11977",
+    "why": "BENCH2ROBUST distinguishes retry switching tools and safe stopping under controlled failure solvability.",
+    "code": "",
+    "note": "2026 preprint; results reflect tested retail/tool benchmarks and do not guarantee real-world effect reversal."
+  },
+  {
     "id": "agentchaosbench",
     "kind": "paper",
     "area": "Recovery benchmark",
@@ -214,6 +370,54 @@
     "why": "Combines step telemetry and deterministic verification with repair experiments.",
     "code": "",
     "note": ""
+  },
+  {
+    "id": "verified-tool-calls",
+    "kind": "paper",
+    "area": "Transactional recovery",
+    "title": "Verified Tool Calls Improve LLM Agent Reliability Under Non-Atomic Failures",
+    "year": 2026,
+    "date": "2026-07-31",
+    "url": "https://arxiv.org/abs/2608.02645",
+    "why": "Studies postcondition checking verify-before-retry and idempotency keys under non-atomic simulated tool calls.",
+    "code": "",
+    "note": "2026 preprint; simulated faults only. Read-back alone cannot resolve all late or in-flight commits."
+  },
+  {
+    "id": "memtx",
+    "kind": "paper",
+    "area": "Transactional recovery",
+    "title": "MemTX: Transactional Belief Commit for Stateful Agent Memory",
+    "year": 2026,
+    "date": "2026-07-27",
+    "url": "https://arxiv.org/abs/2607.23929",
+    "why": "Stages evidence-backed shared-memory writes and triggers cascading repair after a belief is retracted.",
+    "code": "",
+    "note": "2026 preprint; protocol invariants and tested environments do not imply universal compensation of irreversible actions."
+  },
+  {
+    "id": "air",
+    "kind": "paper",
+    "area": "Security recovery",
+    "title": "AIR: Improving Agent Safety through Incident Response",
+    "year": 2026,
+    "date": "2026-07",
+    "url": "https://proceedings.mlr.press/v306/xiao26n.html",
+    "why": "Introduces incident detection containment recovery and future guardrail synthesis inside agent execution.",
+    "code": "",
+    "note": "ICML 2026; author-reported incident remediation results from three evaluated agent types, not independent production certification."
+  },
+  {
+    "id": "gui-robusteval",
+    "kind": "paper",
+    "area": "Recovery benchmark",
+    "title": "Recovering Policy-Induced Errors: Benchmarking and Trajectory Synthesis for Robust GUI Agents",
+    "year": 2026,
+    "date": "2026-07",
+    "url": "https://proceedings.mlr.press/v306/bu26b.html",
+    "why": "Introduces GUI-RobustEval with executable wrong-action recovery cases and RoTS recovery-trajectory synthesis.",
+    "code": "https://github.com/AlibabaResearch/RoTS",
+    "note": "ICML 2026; 1,216 test cases are author-reported. Controlled GUI evaluation is not arbitrary remote rollback."
   },
   {
     "id": "src",
@@ -240,6 +444,18 @@
     "note": ""
   },
   {
+    "id": "delact",
+    "kind": "paper",
+    "area": "Transactional recovery",
+    "title": "DelAct: A Replayable Boundary Runtime for Auditable and Governed LLM Agent Workflows",
+    "year": 2026,
+    "date": "2026-06",
+    "url": "https://doi.org/10.1109/IWQoS70441.2026.11661202",
+    "why": "Separates deliberation actuation and append-only logging for replay idempotent execution and compensation.",
+    "code": "",
+    "note": "IEEE/ACM IWQoS 2026; demonstrated in a ticket/invoice workflow under selected faults, not universal rollback."
+  },
+  {
     "id": "probe-structured-recovery",
     "kind": "paper",
     "area": "Self-recovery",
@@ -252,6 +468,18 @@
     "note": "ASE 2026 paper; 257 initially unresolved cases and outcomes reported by authors; diagnosis does not itself guarantee recovery."
   },
   {
+    "id": "rac",
+    "kind": "paper",
+    "area": "Transactional recovery",
+    "title": "Robust Agent Compensation (RAC): Teaching AI Agents to Compensate",
+    "year": 2026,
+    "date": "2026-05-05",
+    "url": "https://arxiv.org/abs/2605.03409",
+    "why": "Studies log-based compensation layers that track agent effects and support corrective execution.",
+    "code": "",
+    "note": "2026 preprint; claims are evaluated in selected framework and benchmark environments, not arbitrary APIs."
+  },
+  {
     "id": "crab",
     "kind": "paper",
     "area": "Checkpoint and restore",
@@ -262,6 +490,18 @@
     "why": "Uses OS-effect inspection to make agent sandbox checkpointing more selective.",
     "code": "",
     "note": ""
+  },
+  {
+    "id": "atomix",
+    "kind": "paper",
+    "area": "Transactional recovery",
+    "title": "Atomix: Timely, Transactional Tool Use for Reliable Agentic Workflows",
+    "year": 2026,
+    "date": "2026-02-16",
+    "url": "https://arxiv.org/abs/2602.14849",
+    "why": "Uses progress-aware resource frontiers to gate commits and distinguish bufferable reversible and irreversible effects.",
+    "code": "",
+    "note": "Preprint; requires orchestrator/tool adapters. Authors do not claim distributed deployment or fully validated crash-safe exactly-once."
   },
   {
     "id": "reliabilitybench",
@@ -288,16 +528,28 @@
     "note": "2025 arXiv version later revised in 2026."
   },
   {
-    "id": "trajectory-survey",
-    "kind": "survey",
-    "area": "Failure diagnosis",
-    "title": "A Survey for LLM Agent Trajectory Analysis: From Failure Attribution to Enhancement",
-    "year": 2026,
-    "date": "2026-07",
-    "url": "https://doi.org/10.1109/TSE.2026.3717765",
-    "why": "Surveys agent trajectory attribution and the connections to agent enhancement.",
+    "id": "sagallm",
+    "kind": "paper",
+    "area": "Transactional recovery",
+    "title": "SagaLLM: Context Management, Validation, and Transaction Guarantees for Multi-Agent LLM Planning",
+    "year": 2025,
+    "date": "2025-08-01",
+    "url": "https://doi.org/10.14778/3750601.3750611",
+    "why": "Applies saga-style compensation persistent context and independent validation to multi-agent planning.",
+    "code": "https://github.com/genglongling/SagaLLM",
+    "note": "PVLDB 2025; compensating workflows relax ACID and cannot universally undo irreversible external effects."
+  },
+  {
+    "id": "recovery-bench",
+    "kind": "paper",
+    "area": "Recovery benchmark",
+    "title": "Recovery-Bench: Evaluating Agentic Recovery from Mistakes",
+    "year": 2025,
+    "date": "2025",
+    "url": "https://openreview.net/forum?id=8FZRnDgDxq",
+    "why": "Evaluates agent recovery from prior failed trajectories and polluted context rather than clean starts.",
     "code": "",
-    "note": ""
+    "note": "OpenReview submission associated with NeurIPS 2025; publication or acceptance status not independently established; not external transaction recovery."
   },
   {
     "id": "reflexion",
@@ -320,6 +572,18 @@
     "date": "2022-10",
     "url": "https://arxiv.org/abs/2210.03629",
     "why": "Foundational combined reasoning and acting tool-use loop.",
+    "code": "",
+    "note": ""
+  },
+  {
+    "id": "trajectory-survey",
+    "kind": "survey",
+    "area": "Failure diagnosis",
+    "title": "A Survey for LLM Agent Trajectory Analysis: From Failure Attribution to Enhancement",
+    "year": 2026,
+    "date": "2026-07",
+    "url": "https://doi.org/10.1109/TSE.2026.3717765",
+    "why": "Surveys agent trajectory attribution and the connections to agent enhancement.",
     "code": "",
     "note": ""
   },
@@ -372,18 +636,6 @@
     "note": "External side-effect correctness is separate."
   },
   {
-    "id": "temporal-cookbook",
-    "kind": "guide",
-    "area": "Durable execution",
-    "title": "Temporal AI Cookbook",
-    "year": 2026,
-    "date": "2026-10",
-    "url": "https://docs.temporal.io/ai/cookbook",
-    "why": "Official guidance for agent workflows and integrations.",
-    "code": "",
-    "note": ""
-  },
-  {
     "id": "inngest",
     "kind": "runtime",
     "area": "Durable execution",
@@ -428,6 +680,18 @@
     "date": "2026-10",
     "url": "https://github.com/langchain-ai/docs/blob/main/src/oss/langgraph/persistence.mdx",
     "why": "Graph checkpointing and time-travel for agent state.",
+    "code": "",
+    "note": ""
+  },
+  {
+    "id": "temporal-cookbook",
+    "kind": "guide",
+    "area": "Durable execution",
+    "title": "Temporal AI Cookbook",
+    "year": 2026,
+    "date": "2026-10",
+    "url": "https://docs.temporal.io/ai/cookbook",
+    "why": "Official guidance for agent workflows and integrations.",
     "code": "",
     "note": ""
   },
