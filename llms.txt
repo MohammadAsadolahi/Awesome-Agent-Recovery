@@ -3,7 +3,7 @@
 > An open-source, curated research-to-production knowledge base about AI agent failure recovery: detecting failures, safely recovering tool and workflow state, verifying results, and resuming or stopping autonomous agents.
 
 Canonical repository: https://github.com/MohammadAsadolahi/Awesome-Agent-Recovery
-Updated: 2026-10-28
+Updated: 2026-10-29
 
 ## Primary navigation
 
@@ -15,6 +15,9 @@ Updated: 2026-10-28
 - [Research scope and evidence policy](https://raw.githubusercontent.com/MohammadAsadolahi/Awesome-Agent-Recovery/main/docs/research-decision.md): Curatorial criteria and source-quality caveats.
 - [Machine-readable source index (JSON)](https://raw.githubusercontent.com/MohammadAsadolahi/Awesome-Agent-Recovery/main/data/resources.json): Titles, canonical URLs, dates, categories, and annotations.
 - [Source index (CSV)](https://raw.githubusercontent.com/MohammadAsadolahi/Awesome-Agent-Recovery/main/data/resources.csv): Same index for spreadsheet or ingestion workflows.
+
+- [Docs navigation and directory](https://raw.githubusercontent.com/MohammadAsadolahi/Awesome-Agent-Recovery/main/docs/README.md): Task-based entrypoints for research, benchmarking and implementation.
+- [Research review, 2026-10-29](https://raw.githubusercontent.com/MohammadAsadolahi/Awesome-Agent-Recovery/main/docs/research-update-2026-10-29.md): New primary sources, selection methodology and benchmark limits.
 
 ## Optional
 
