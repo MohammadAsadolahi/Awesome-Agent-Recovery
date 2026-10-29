@@ -14,6 +14,14 @@ A self-healing agent system can notice failures and apply bounded corrective mec
 
 Reliability concerns the frequency and severity of failures across operation; recovery concerns what the agent and surrounding system do **after** a failure or suspected failure. Recovery is one component of reliability, along with prevention, observability and evaluation.
 
+## Why can checking a failed write and then retrying still be dangerous?
+
+An immediate status query might report no effect while the original write is still in flight. A retry can then create a duplicate after the first attempt commits. Safe repetition depends on the external tool's documented idempotency, conditional-write or terminal-status guarantees. [LIMBO](https://arxiv.org/abs/2609.29095) studies this boundary; [UndoBench](https://arxiv.org/abs/2610.05622) measures how recovery changes across mutation phases.
+
+## What is the difference between task success and conditional recovery success?
+
+Nominal task competence asks whether a task succeeds without injected failure. Conditional recovery success asks whether an agent successfully handles an injected fault **in tasks it would otherwise complete**. The result still needs independent side-effect verification, not just a “done” message. See [evaluation protocol](benchmarks.md#side-effect-correctness-and-the-recovery-denominator).
+
 ## How do agents recover from tool errors?
 
 A practical pattern is **detect → diagnose → reconcile authoritative state → classify the action → choose a bounded retry, replan, repair, rollback, compensation or escalation → independently verify**. Read-only calls are often safer to retry than non-idempotent external writes. See the [field guide](field-guide.md) and [ToolMaze](https://arxiv.org/abs/2606.05806).
@@ -32,7 +40,7 @@ Consider human review when the outcome is unknown, a potentially irreversible ac
 
 ## Which benchmarks evaluate LLM agent recovery?
 
-[CUA-Recovery](https://arxiv.org/abs/2610.27645) examines inherited desktop errors; [ToolMaze](https://arxiv.org/abs/2606.05806) focuses on tool failures; [ReInBench](https://arxiv.org/abs/2610.36471) covers intervention and self-recovery; [RegretBench](https://arxiv.org/abs/2610.28934) considers backup awareness; [MettleBench](https://arxiv.org/abs/2608.14380) evaluates selected long-horizon rewind tasks. Their measures are not directly comparable.
+[LIMBO](https://arxiv.org/abs/2609.29095) tests late commits and duplicate writes; [UndoBench](https://arxiv.org/abs/2610.05622) separates nominal competence from conditional recovery; [ParaRecover](https://aclanthology.org/2026.emnlp-main.975/) examines parallel-tool cascading errors; [ToolMisuseBench](https://aclanthology.org/2026.realm-1.28/) measures deterministic tool fault recovery; [GUI-RobustEval](https://proceedings.mlr.press/v306/bu26b.html) covers GUI policy mistakes. [CUA-Recovery](https://arxiv.org/abs/2610.27645) examines inherited desktop errors; [ToolMaze](https://arxiv.org/abs/2606.05806) focuses on tool failures; [ReInBench](https://arxiv.org/abs/2610.36471) covers intervention and self-recovery; [RegretBench](https://arxiv.org/abs/2610.28934) considers backup awareness; [MettleBench](https://arxiv.org/abs/2608.14380) evaluates selected long-horizon rewind tasks. Their measures are not directly comparable.
 
 ## Does a good root-cause diagnosis prove the agent has recovered?
 
