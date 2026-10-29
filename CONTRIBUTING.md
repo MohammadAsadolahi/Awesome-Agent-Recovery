@@ -27,7 +27,7 @@ Pull requests should be small, factual, and easy to verify. Corrections to exist
 
 - [ ] Primary scholarly or official documentation URL verified; paper title, date and venue match.
 - [ ] Scope is failure-specific and meaningfully non-duplicative; record whether it detects, diagnoses, repairs, reruns or verifies.
-- [ ] Any claimed numbers are **author-reported**, with benchmark, denominator and environment named.
+- [ ] Any claimed numbers are **author-reported**, with benchmark, denominator, fault phase, external-effect ledger or postcondition verifier, and environment named.
 - [ ] Code/project link was inspected; no unsupported runnable/released-code claim.
 - [ ] CSV edited as the source of truth, JSON regenerated with `python scripts/validate.py --sync-json`.
 - [ ] README, relevant docs, and any resource-count badge updated when needed.
