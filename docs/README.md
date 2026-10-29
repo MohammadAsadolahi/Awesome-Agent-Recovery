@@ -1,19 +1,27 @@
-# Documentation and Resource Map
+# Documentation directory
 
-Start with the task you want to accomplish. This is a curated research/engineering reference, **not** a recovery library or a promise of automated rollback.
+**Awesome Agent Recovery** is a curated, evidence-first guide to agent failure detection, safe intervention, environment repair, durable execution and independently verified recovery.
 
-| You want to… | Start here | Next step |
+| I want to… | Start here | Follow with |
 | --- | --- | --- |
-| Choose a response after a live failure | [Field guide](field-guide.md) | [Decision flow in README](../README.md#the-agent-recovery-decision-flow) |
-| Diagnose the first causal mistake | [Research papers](../README.md#failure-detection-localization-and-diagnosis) | [Evaluation levels](benchmarks.md#evaluation-taxonomy-do-not-collapse-distinct-success-measures) |
-| Design or evaluate a recovery benchmark | [Benchmarks](benchmarks.md) | [Resource metadata](../data/resources.csv) |
-| Safely resume a crashed workflow | [Production systems](production-systems.md) | [Ambiguous-write demo](../examples/ambiguous_write_demo.py) |
-| Compare new research and decide what to add | [29 October 2026 review](research-update-2026-10-29.md) | [Evidence and scope policy](research-decision.md) |
-| Find definitions and common questions | [FAQ](faq.md) | [llms.txt](../llms.txt) |
-| Suggest papers or fixes | [Contribution guide](../CONTRIBUTING.md) | [Machine-readable catalog](../data/resources.json) |
+| Decide what to do after a tool timeout or ambiguous write | [Recovery field guide](field-guide.md) | [Decision flow](../README.md#the-agent-recovery-decision-flow) |
+| Understand idempotency, late commits, compensation and effect ledgers | [Transactional recovery review](research-update-2026-10-29-transactional.md) | [Production boundaries](production-systems.md) |
+| Diagnose a long-horizon trajectory | [Failure localization papers](../README.md#failure-detection-localization-and-diagnosis) | [Previous research review](research-update-2026-10-29.md) |
+| Choose a benchmark or fault-injection protocol | [Benchmarks and evaluation](benchmarks.md) | [Recovery-specific metrics](benchmarks.md#side-effect-correctness-and-the-recovery-denominator) |
+| Compare workflow durability and checkpoint implementations | [Production systems](production-systems.md) | [Controlled simulation](../examples/ambiguous_write_demo.py) |
+| Find definitions and interpretation guidance | [FAQ](faq.md) | [Curation policy](research-decision.md) |
+| Contribute another paper or correction | [Contributing](../CONTRIBUTING.md) | [Catalog](../data/resources.csv) |
 
-## Data maintenance
+## Catalog conventions
 
-The single editable resource index is [`data/resources.csv`](../data/resources.csv). Generate [`data/resources.json`](../data/resources.json) with `python scripts/validate.py --sync-json`; then run `python scripts/validate.py` and `python -m unittest discover -s tests`. Annotations should name the **failure boundary** and **verification limit** rather than just saying a framework improves reliability.
+[CSV](../data/resources.csv) is the **single editorial source of truth**; [JSON](../data/resources.json) is a synchronized derived representation. Both include IDs, kind, area, canonical URL, year/date, a one-sentence reason for inclusion, an optional code link, and an evidence/limitations note.
 
-The [main README](../README.md) contains the shorter hand-curated reading paths and recovery decision table. Detailed guides stay in `docs/` so the homepage remains approachable.
+To validate a change:
+
+```bash
+python scripts/validate.py --sync-json
+python scripts/validate.py
+python -m unittest discover -s tests
+```
+
+The [main README](../README.md) deliberately favors **reading paths and decision aids**. Detailed evidence qualifications and experimental assumptions belong in these guides rather than in inflated README claims.
