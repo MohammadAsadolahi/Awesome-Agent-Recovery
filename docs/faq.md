@@ -1,6 +1,6 @@
 # AI Agent Recovery: Frequently Asked Questions
 
-_Updated 29 October 2026. Answers synthesize the cited resources; check primary publications for specific experimental claims._
+_Updated 30 October 2026. Answers synthesize the cited resources; check primary publications for specific experimental claims._
 
 ## What is AI agent failure recovery?
 
@@ -21,6 +21,18 @@ An immediate status query might report no effect while the original write is sti
 ## What is the difference between task success and conditional recovery success?
 
 Nominal task competence asks whether a task succeeds without injected failure. Conditional recovery success asks whether an agent successfully handles an injected fault **in tasks it would otherwise complete**. The result still needs independent side-effect verification, not just a “done” message. See [evaluation protocol](benchmarks.md#side-effect-correctness-and-the-recovery-denominator).
+
+## Does a successful-looking tool response guarantee the tool was correct?
+
+No. Silent tool corruption can preserve the expected output format while changing the underlying fact. [RITE](https://arxiv.org/abs/2610.27777) evaluates this distinction. Critical responses should be checked against authoritative observations, not trusted merely because parsing succeeded.
+
+## Can a restarted agent retry an action if permissions have changed?
+
+Not necessarily. Separate the original authority to dispatch from current authority to retry or reconcile, as studied by [Permission to Retry](https://arxiv.org/abs/2610.31916). The previous checkpoint does not confer permanent authorization.
+
+## Is an honest failure the same as recovery?
+
+No. An agent that accurately says it cannot verify a result is more trustworthy than one that invents completion, but **the task remains unresolved**. [Failure-Transparent Agents](https://arxiv.org/abs/2609.35732) and [RetryRealistic](https://openreview.net/forum?id=HLCpv21u07) measure this distinction.
 
 ## How do agents recover from tool errors?
 
