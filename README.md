@@ -2,7 +2,7 @@
 
 [![Awesome](https://awesome.re/badge-flat.svg)](https://awesome.re)
 [![Quality checks](https://github.com/MohammadAsadolahi/Awesome-Agent-Recovery/actions/workflows/quality.yml/badge.svg)](https://github.com/MohammadAsadolahi/Awesome-Agent-Recovery/actions/workflows/quality.yml)
-[![Curated resources](https://img.shields.io/badge/curated_resources-66-2563eb)](data/resources.csv)
+[![Curated resources](https://img.shields.io/badge/curated_resources-79-2563eb)](data/resources.csv)
 [![Metadata license: CC0 1.0](https://img.shields.io/badge/metadata_license-CC0--1.0-16a34a)](LICENSE)
 [![Contributions welcome](https://img.shields.io/badge/contributions-welcome-8b5cf6)](CONTRIBUTING.md)
 
@@ -20,7 +20,7 @@
 > [!IMPORTANT]
 > **Agent state is not external truth.** A conversation checkpoint, a successful tool response or a completed workflow is not proof that a payment, booking, message or database mutation was correctly applied. After ambiguous writes, first inspect authoritative state and the tool contract. A retry can be unsafe even after an empty read-back if an earlier request is still in flight.
 
-**Last curated review:** 29 October 2026. The index currently contains **66 resources** (research, benchmark artifacts, engineering guides and related collections). Paper scores are **author-reported** unless expressly identified as independently reproduced. The local example is a **simulation**, not a production transaction engine.
+**Last curated review:** 30 October 2026. The index currently contains **79 resources** (research, benchmark artifacts, engineering guides and related collections). Paper scores are **author-reported** unless expressly identified as independently reproduced. The local example is a **simulation**, not a production transaction engine.
 
 ## Contents
 
@@ -34,6 +34,7 @@
   - [Tool failures, intervention, and self-recovery](#tool-failures-intervention-and-self-recovery)
   - [Checkpointing, restoration, and reversibility](#checkpointing-restoration-and-reversibility)
   - [Multi-agent and security incident recovery](#multi-agent-and-security-incident-recovery)
+  - [Verification and honest failure reporting](#verification-and-honest-failure-reporting)
 - [Benchmarks and evaluation](#benchmarks-and-evaluation)
 - [Production systems and implementation guides](#production-systems-and-implementation-guides)
 - [Try a failure-injection example](#try-a-failure-injection-example)
@@ -72,7 +73,17 @@ Choose a reading path based on the problem you are solving.
 | **How do I measure recovery independently of task competence?** | [GUI-RobustEval](https://proceedings.mlr.press/v306/bu26b.html) · [ToolMisuseBench](https://aclanthology.org/2026.realm-1.28/) · [ParaRecover](https://aclanthology.org/2026.emnlp-main.975/) | Controlled recovery cases for GUI, sequential and parallel tool use |
 | **What survives process crashes and sandbox damage?** | [AgentRewind](https://arxiv.org/abs/2608.14380) · [Crab](https://arxiv.org/abs/2604.28138) · [production comparison](docs/production-systems.md) | Separates workflow, context, sandbox and external-state persistence |
 
-**New review:** [Transactional recovery, fault injection and safe resumption — October 2026](docs/research-update-2026-10-29-transactional.md) explains the latest 22 selections, comparisons and evidence limitations. See also the [earlier research review](docs/research-update-2026-10-29.md).
+**Latest research review:** [MCP faults, asynchronous recovery, evaluator alignment, and verification — 30 October 2026](docs/research-update-2026-10-30.md) evaluates 13 papers against prior entries, including exclusions and implementation evidence. Earlier reviews: [transactional recovery](docs/research-update-2026-10-29-transactional.md) and [failure diagnosis](docs/research-update-2026-10-29.md).
+
+### Newly added research: 30 October 2026
+
+| New question | Read first | What it adds |
+| --- | --- | --- |
+| Does the chosen repair work for the **actual deployed agent**? | [Repairs for Whom?](https://arxiv.org/abs/2610.38610) | Evaluator–executor mismatch and executor-specific rollout evidence |
+| Can an agent withstand **realistic MCP faults**? | [MCP-Injector](https://arxiv.org/abs/2610.32555) · [RetryRealistic](https://openreview.net/forum?id=HLCpv21u07) | Seedable protocol faults and sandboxed real-tool tests |
+| May a restarted workflow still **exercise authority**? | [Permission to Retry](https://arxiv.org/abs/2610.31916) | Separate dispatch, settlement and reconciliation permissions |
+| Can a coordinator use **late subagent results** correctly? | [Async-RBench](https://arxiv.org/abs/2610.32429) · [REVISE](https://arxiv.org/abs/2609.00643) | Preserve valid work, invalidate stale dependencies and reverify |
+| Can the system detect a **silent fault or fabricated success**? | [RITE](https://arxiv.org/abs/2610.27777) · [Failure-Transparent Agents](https://arxiv.org/abs/2609.35732) | Independent evidence vs plausible results and unsupported final claims |
 
 ## Find a recovery strategy
 
@@ -83,7 +94,10 @@ Use this table to locate the appropriate research **before** applying automated 
 | **Read-only tool times out** | Capped retries with backoff; validate the returned data | [ToolMaze](https://arxiv.org/abs/2606.05806), [BENCH2ROBUST](https://arxiv.org/abs/2608.11977) |
 | **Write times out after dispatch** | Identify the business operation; reconcile status, in-flight uncertainty and idempotency guarantees | [LIMBO](https://arxiv.org/abs/2609.29095), [UndoBench](https://arxiv.org/abs/2610.05622), [field guide](docs/field-guide.md) |
 | **Operation partly committed** | Determine committed subset; only compensate or resume the remaining work under supported contracts | [SagaLLM](https://doi.org/10.14778/3750601.3750611), [RAC](https://arxiv.org/abs/2605.03409), [DelAct](https://doi.org/10.1109/IWQoS70441.2026.11661202) |
+| **Tool returns a plausible but false value** | Verify source evidence before adopting the value; distinguish silent from explicit errors | [RITE](https://arxiv.org/abs/2610.27777), [Loud Failures, Quiet Failures](https://arxiv.org/abs/2610.10062) |
 | **Returned success masks unexpected effects** | Compare actual persistent changes with the authorized outcome | [EffectMatch](https://arxiv.org/abs/2609.31301), [verified tool calls](https://arxiv.org/abs/2608.02645) |
+| **Recovered workflow has changed permissions** | Check current dispatch and reconciliation authority separately from the stored checkpoint | [Permission to Retry](https://arxiv.org/abs/2610.31916) |
+| **Subagent replies late or provides stale evidence** | Recheck affected dependencies, avoid revising valid work, and re-run necessary assertions | [Async-RBench](https://arxiv.org/abs/2610.32429), [REVISE](https://arxiv.org/abs/2609.00643) |
 | **Tool is broken or paths are exhausted** | Classify transient/permanent failure; retry, switch or abstain | [BENCH2ROBUST](https://arxiv.org/abs/2608.11977), [ToolMisuseBench](https://aclanthology.org/2026.realm-1.28/) |
 | **Agent repeats or misdiagnoses a mistake** | Locate causal error; intervene only when evidence warrants it | [Traverse](https://arxiv.org/abs/2609.17930), [Sentry](https://arxiv.org/abs/2610.02994), [RESKILL](https://aclanthology.org/2026.emnlp-main.2024/) |
 | **GUI state was changed incorrectly** | Inspect inherited state, restore only supported boundaries and verify completion | [CUA-Recovery](https://arxiv.org/abs/2610.27645), [GUI-RobustEval](https://proceedings.mlr.press/v306/bu26b.html), [CUADebug](https://aclanthology.org/2026.findings-emnlp.530/) |
@@ -124,6 +138,7 @@ The selections below are grouped by **what can fail and what can actually be rep
 
 ### Transactional recovery and side-effect integrity
 
+- [Permission to Retry](https://arxiv.org/abs/2610.31916) (2026 preprint) — Tests whether retained state and changed authorization still permit dispatch, reconciliation or reattempt after a crash.
 *Safe retries, compensation, commit control, effect verification and durable boundaries.*
 
 - [Where Does Exactly-Once Live? / LIMBO](https://arxiv.org/abs/2609.29095) (2026 preprint) — Service-boundary fault injection with committed-effect ledgers; shows where verification-only retries cannot ensure exactly-once.
@@ -155,6 +170,11 @@ The selections below are grouped by **what can fail and what can actually be rep
 
 ### Tool failures, intervention, and self-recovery
 
+- [Tool-Calling LLM Agents Under Realistic MCP Faults / MCP-Injector](https://arxiv.org/abs/2610.32555) (2026 preprint; authors report NeurIPS 2026 acceptance) — Injects seeded persistent/transient/intermittent MCP failures derived from public ecosystem issue evidence. [Code and data](https://gitlab.com/uniluxembourg/snt/sedan/papers/mcp-injector).
+- [RITE: Evaluating End-to-End Resilience to Silent Tool Errors](https://arxiv.org/abs/2610.27777) (2026 preprint) — Matched explicit failures and plausible-but-wrong results test recognition, verification and eventual task outcome.
+- [Loud Failures, Quiet Failures](https://arxiv.org/abs/2610.10062) (2026 preprint) — Tracks noticing, replanning, looping and task recovery separately across injected faults.
+- [Agent-Reflex](https://arxiv.org/abs/2610.17953) (2026 work-in-progress preprint) — Perturbation-grounded reflection skills and recovery-oriented training for tool noise and user corrections. [Code, weights and datasets](https://github.com/RUC-NLPIR/Agent-Reflex).
+
 *Choosing a bounded corrective action and verifying the repair attempt.*
 
 - [When Tools Fail / ToolMaze](https://arxiv.org/abs/2606.05806) (2026) — Explicit/implicit, temporary/persistent tool failures and dynamic replanning. [Code](https://github.com/Zhudongsheng75/ToolMaze).
@@ -168,6 +188,8 @@ The selections below are grouped by **what can fail and what can actually be rep
 
 ### Checkpointing, restoration, and reversibility
 
+- [REVISE: Validity-Guided Recovery for Online Revisions](https://arxiv.org/abs/2609.00643) (2026 preprint) — Tracks workflow dependencies to preserve valid completed work after instruction revisions while recomputing affected branches.
+
 *What can be rolled back, how much progress survives and which effects remain outside a snapshot.*
 
 - [AgentRewind](https://arxiv.org/abs/2608.14380) (2026) — Aligned agent/context and environment checkpoints for engineering agents.
@@ -177,6 +199,9 @@ The selections below are grouped by **what can fail and what can actually be rep
 - [Self-Healing Harness for Agent Self-Modification](https://arxiv.org/abs/2609.24130) (2026) — Regression gates for executable self-modifications.
 
 ### Multi-agent and security incident recovery
+
+- [When Messages Go Wrong](https://arxiv.org/abs/2610.15459) (2026 preprint) — Tests message loss, delay and partial content and compares evidence-preserving multi-agent architectures. [Code and artifacts](https://github.com/SonGoKu21/mas_communication).
+- [Async-RBench](https://arxiv.org/abs/2610.32429) (2026 preprint) — Executable asynchronous result-delivery scenarios, including stale updates, duplicates and failed subagents. [Code](https://github.com/pope8zdt/Async-RBench).
 
 *Containing failures before they spread through shared plans, memory or permissions.*
 
@@ -188,14 +213,32 @@ The selections below are grouped by **what can fail and what can actually be rep
 - [Safety Must Survive Self-Improvement](https://arxiv.org/abs/2610.01073) (2026 preprint) — Revalidates and rolls back unsafe persistent agent revisions.
 - [EpiSEM-Bench](https://arxiv.org/abs/2610.31650) (2026 preprint) — Tests recovery of missing safety-relevant evidence before tool actions.
 
+### Verification and honest failure reporting
+
+*Distinguish verified effects, correctly diagnosed uncertainty, and unsupported success claims.*
+
+- [Failure-Transparent Agents](https://arxiv.org/abs/2609.35732) (2026 preprint) — Measures false-success and fabricated-detail statements after controlled failed tool observations; tests a structured evidence contract.
+- [When Tools Fail, Agents Fabricate / RetryRealistic](https://openreview.net/forum?id=HLCpv21u07) (NeurIPS 2026 workshop, per authors) — Sandbox file, SQLite and HTTP faults scored as correct, fabricated or honest failure. [Runnable testbed](https://github.com/Kingsford-Group/RetryRealistic).
+
+A low fabricated-success rate improves **reporting calibration**; it does not by itself show that any failed tool operation was repaired. A monitor triggered only by explicit errors may still miss silent corruption.
+
 For foundational reasoning/action design, see [ReAct](https://arxiv.org/abs/2210.03629). It is a foundation for agent tool use, **not** a recovery safety primitive.
 
 ## Benchmarks and evaluation
+
+**New evaluation caution:** [Repairs for Whom?](https://arxiv.org/abs/2610.38610) shows repair rankings can change with the executor used for scoring. Verify selected repairs on the **deployed policy**, not solely on a more capable judge. [SSCBench](https://arxiv.org/abs/2610.11514) adds a second caution: a fault-injection case should be credited with available counterevidence only if that evidence could reach the agent **before first erroneous use**. Both are evaluation-validity questions, not automatic recovery mechanisms.
 
 A recovery benchmark should expose failures that a clean-run task score would hide. A **diagnosis score** is not a **repaired-task score**; neither is evidence of **correct external effects**.
 
 | Benchmark | Evaluates | Important limitation |
 | --- | --- | --- |
+| [Repairs for Whom?](https://arxiv.org/abs/2610.38610) | Executor-dependent choice of effective repair step | ALFWorld/WebShop experiments; executor mismatch changes rankings |
+| [MCP-Injector](https://arxiv.org/abs/2610.32555) | Protocol-aware MCP tool faults with persistence schedules | Two backbone sizes; do not extrapolate model-scale claim |
+| [Async-RBench](https://arxiv.org/abs/2610.32429) | Late/stale/duplicate subagent outcomes and necessary revalidation | Dynamic Replanning Score differs from task success |
+| [AndroidFlux](https://arxiv.org/abs/2610.34384) | Mobile recovery from aligned AndroidWorld checkpoints | Controlled device snapshots and offline reward comparisons |
+| [RITE](https://arxiv.org/abs/2610.27777) | Silent tool errors versus explicit errors and clean tool values | E-commerce workflows with frozen tool behavior |
+| [SSCBench](https://arxiv.org/abs/2610.11514) | Whether timely counterevidence existed before faulty reliance | Evidential-validity measurement, not repaired outcomes |
+| [RetryRealistic](https://openreview.net/forum?id=HLCpv21u07) | Real sandbox tools with honest-failure/fabrication outcome labels | Monitor requires signaled error to activate; sandbox only |
 | [LIMBO](https://arxiv.org/abs/2609.29095) | Duplicate writes, late commits, delivery semantics, effect ledgers | Sandbox/contract-specific |
 | [UndoBench](https://arxiv.org/abs/2610.05622) | Nominal competence vs conditional recovery, duplicate/missing effect rates | Paired enterprise simulations |
 | [GUI-RobustEval](https://proceedings.mlr.press/v306/bu26b.html) | Recovery from GUI policy mistakes | Controlled executable tasks |
@@ -249,6 +292,7 @@ Expected simulation: **two writes** with blind retry, versus **one write** with 
 | [Recovery field guide](docs/field-guide.md) | Failure classes, reconciliation and escalation |
 | [Benchmark and evaluation protocol](docs/benchmarks.md) | Fault injection and non-conflated metrics |
 | [Production systems](docs/production-systems.md) | Workflow, context, sandbox and remote-effect boundaries |
+| [30 October 2026 evidence review](docs/research-update-2026-10-30.md) | New fault, evaluator-alignment, asynchronous, and truthful-reporting studies |
 | [Transactional recovery research review](docs/research-update-2026-10-29-transactional.md) | 22 newly curated sources, synthesis and limits |
 | [Earlier research review](docs/research-update-2026-10-29.md) | Diagnostic and recovery research curation |
 | [Scope and evidence policy](docs/research-decision.md) | Inclusion criteria and source hierarchy |

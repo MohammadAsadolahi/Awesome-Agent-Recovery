@@ -1,6 +1,6 @@
 # Benchmarks and Evaluation Protocol
 
-_Updated 2026-10-29. Numbers below are as reported by authors, not independently reproduced._
+_Updated 2026-10-30. Numbers below are as reported by authors, not independently reproduced._
 
 ## Recovery-specific benchmarks
 
@@ -8,6 +8,12 @@ _Updated 2026-10-29. Numbers below are as reported by authors, not independently
 
 | Benchmark | Paper | Target failure | Caution |
 | --- | --- | --- | --- |
+| MCP-Injector | [Realistic MCP Faults](https://arxiv.org/abs/2610.32555) | Incident-derived protocol fault persistence across tested model/stacks | Two tested model sizes; no general scale conclusion |
+| RITE | [Silent Tool Errors](https://arxiv.org/abs/2610.27777) | 501 paired correct/explicit/silent-condition instances | E-commerce workflows and frozen tools |
+| Async-RBench | [Asynchronous Task Execution](https://arxiv.org/abs/2610.32429) | 200 executable tasks in eight subagent-result scenarios | Replanning score not equivalent to task success |
+| AndroidFlux | [Mobile Agent Error Recovery](https://arxiv.org/abs/2610.34384) | Checkpoint-aligned AndroidWorld recovery and action ranking | Controlled device state and rollout setting |
+| SSCBench | [Evidential Validity](https://arxiv.org/abs/2610.11514) | 1,191 faulted runs; counterevidence before first faulty reliance | Exposure validity is not repair success |
+| RetryRealistic | [When Tools Fail, Agents Fabricate](https://openreview.net/forum?id=HLCpv21u07) | 30 tasks, nine fault types, file/SQLite/HTTP ground truth | Honest failure vs fabricated answer; workshop per authors |
 | LIMBO | [Where Does Exactly-Once Live?](https://arxiv.org/abs/2609.29095) | 25,930 author-reported episodes across service contracts, late commits and duplicate delivery | Tracks real effect ledger in sandbox; does not establish generic exactly-once |
 | UndoBench | [Separating Task Competence from Recovery](https://arxiv.org/abs/2610.05622) | 2,880 paired lost-ACK trials in the authors' frozen study; pre/during/post-mutation scenarios | Report conditional recovery and duplicate effects separately from nominal task completion |
 | GUI-RobustEval | [Recovering Policy-Induced Errors](https://proceedings.mlr.press/v306/bu26b.html) | 1,216 executable GUI recovery cases | Controlled GUI environment; not remote transaction reversal |
@@ -41,6 +47,14 @@ Failure phase matters: `PRE_MUTATION`, `DURING_MUTATION`, and `POST_MUTATION_PRE
 
 [Same Winners, Different Success Rates](https://arxiv.org/abs/2609.34215) demonstrates that high checkpoint action-ranking agreement can coexist with near-zero absolute success. Report agreement, all-zero fraction, held-out success and pooled success together when evaluating checkpoint policies.
 
+## New evaluation threats: executor mismatch and missing evidence
+
+- [Repairs for Whom?](https://arxiv.org/abs/2610.38610) shows that a repair scored with a stronger evaluator can be less valuable when the deployed agent executes it. Record **both evaluator and executor models**, and validate selected fixes on the actual executor.
+- [SSCBench](https://arxiv.org/abs/2610.11514) distinguishes counterevidence that could be observed **before first faulty use** from counterevidence arriving later. Record injection, first visibility, first consumption and first incorrect reliance.
+- [Async-RBench](https://arxiv.org/abs/2610.32429) separates the response contract (what to change/preserve/reverify) from final task success. Track result order, duplicate notifications, stale dependencies and prohibited effects.
+- [Failure-Transparent Agents](https://arxiv.org/abs/2609.35732) and [RetryRealistic](https://openreview.net/forum?id=HLCpv21u07) separate honest failure, unsupported success claims and verified recovery. A false-success reduction **does not** by itself mean tool effects were repaired.
+- [Permission to Retry](https://arxiv.org/abs/2610.31916) requires checking authorization at replay and reconciliation, not only at initial dispatch.
+
 ## Minimum experiment record
 
 Report the task/environment; exact injected or observed failure; agent and model version; the no-recovery and plain-retry baselines; number of runs; the success verifier; side effects; error-awareness measure; recovery latency/cost; and reproducibility details such as scripts, seeds, code commits and data licenses.
@@ -64,4 +78,4 @@ Do not label future scenarios implemented before their tests exist.
 | 4. Execute | Successful rerun after recovery attempt | Controlled restart and no-recovery baseline |
 | 5. Verify | Correct external state, no duplicate/irreversible collateral effects | Independent authoritative checks and side-effect ledger |
 
-An improved diagnosis score does **not** imply improved safe recovery. Report the **denominator** for recovery (failed cases vs all tasks), whether the restart point is human-labeled or predicted, and whether the environment is resettable. See the [transactional recovery research review](research-update-2026-10-29-transactional.md) and [earlier diagnostics review](research-update-2026-10-29.md) for paper-specific caveats.
+An improved diagnosis score does **not** imply improved safe recovery. Report the **denominator** for recovery (failed cases vs all tasks), whether the restart point is human-labeled or predicted, and whether the environment is resettable. See the [30 October evidence review](research-update-2026-10-30.md), [transactional recovery review](research-update-2026-10-29-transactional.md) and [earlier diagnostics review](research-update-2026-10-29.md) for paper-specific caveats.
