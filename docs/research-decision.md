@@ -1,6 +1,6 @@
 # Scope, Curation and Evidence Policy
 
-_Reviewed 2026-10-29._
+_Reviewed 2026-10-30._
 
 ## Scope
 
@@ -29,6 +29,10 @@ A source can be in scope even if it only evaluates **detection or attribution**,
 **Ambiguous effect caveat:** an empty read-back is not sufficient evidence of safe retry when a write remains in flight; [LIMBO](https://arxiv.org/abs/2609.29095) studies this explicitly. Durable execution does not provide exactly-once external writes without a suitable external contract.
 
 **Version caveat:** use primary proceedings when available. For a source available only through an OpenReview submission or arXiv, label it a submission/preprint without assuming formal acceptance.
+
+## Latest admission and rejection review
+
+The [30 October evidence review](research-update-2026-10-30.md) documents 13 screened additions, primary sources, code-link inspection, overlaps and deferred papers. For **reporting reliability**, label unsupported success separately from actual task recovery. For **repair ranking**, name the deployed executor and evaluator. For **fault-injection validity**, record whether corrective evidence appeared before first erroneous reliance.
 
 ## How this differs from existing lists
 
