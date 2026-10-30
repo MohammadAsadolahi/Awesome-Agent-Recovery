@@ -1,5 +1,17 @@
 [
   {
+    "id": "evaluator-executor-mismatch",
+    "kind": "paper",
+    "area": "Recovery benchmark",
+    "title": "Repairs for Whom? Evaluator-Executor Mismatch in Selecting Repairs for Failed LLM Agents",
+    "year": 2026,
+    "date": "2026-10-28",
+    "url": "https://arxiv.org/abs/2610.38610",
+    "why": "Tests whether candidate repairs selected by a different evaluator improve the deployed agent's own rollouts.",
+    "code": "",
+    "note": "2026 arXiv preprint; tested on ALFWorld and WebShop. Reported 7B-versus-14B repair-ranking losses depend on the evaluator/executor pairing."
+  },
+  {
     "id": "recof",
     "kind": "paper",
     "area": "Self-recovery",
@@ -12,6 +24,42 @@
     "note": "Very recent preprint."
   },
   {
+    "id": "androidflux",
+    "kind": "paper",
+    "area": "Recovery benchmark",
+    "title": "AndroidFlux: Evaluating and Reward Modeling Failure Recovery Capabilities in Mobile Use Multimodal Agents",
+    "year": 2026,
+    "date": "2026-10-25",
+    "url": "https://arxiv.org/abs/2610.34384",
+    "why": "Replays AndroidWorld device states at controlled error checkpoints to isolate mobile-agent recovery from clean-task competence.",
+    "code": "",
+    "note": "2026 preprint; checkpoints and offline RL evaluation use a controlled mobile environment, not arbitrary persistent external side effects."
+  },
+  {
+    "id": "async-rbench",
+    "kind": "paper",
+    "area": "Recovery benchmark",
+    "title": "Async-RBench: Benchmarking Asynchronous Task Execution in LLM Agents",
+    "year": 2026,
+    "date": "2026-10-23",
+    "url": "https://arxiv.org/abs/2610.32429",
+    "why": "Replays delayed stale duplicate and failed subagent results under explicit preserve update and re-verification contracts.",
+    "code": "https://github.com/pope8zdt/Async-RBench",
+    "note": "2026 preprint; 200 executable tasks and nine evaluated agents; Dynamic Replanning Score is separate from end-task success."
+  },
+  {
+    "id": "mcp-injector",
+    "kind": "paper",
+    "area": "Tool failure",
+    "title": "Tool-Calling LLM Agents Under Realistic MCP Faults: Scale Does Not Purchase Fault Tolerance",
+    "year": 2026,
+    "date": "2026-10-23",
+    "url": "https://arxiv.org/abs/2610.32555",
+    "why": "MCP-Injector reproduces protocol-aware permanent transient and intermittent tool faults using ecosystem incident evidence.",
+    "code": "https://gitlab.com/uniluxembourg/snt/sedan/papers/mcp-injector",
+    "note": "2026 arXiv paper reports NeurIPS 2026 poster acceptance; tested two gpt-oss model sizes and three agent stacks; scale claim is limited to those comparisons."
+  },
+  {
     "id": "episem",
     "kind": "paper",
     "area": "Recovery benchmark",
@@ -22,6 +70,18 @@
     "why": "Measures whether agents seek omitted safety-critical facts before taking otherwise dangerous tool actions.",
     "code": "",
     "note": "2026 preprint; 300 matched unsafe/safe task pairs. Evidence acquisition is not restoration of external state."
+  },
+  {
+    "id": "permission-to-retry",
+    "kind": "paper",
+    "area": "Transactional recovery",
+    "title": "Permission to Retry: A Study of Authorization and Recovery in AI Agent Workflows",
+    "year": 2026,
+    "date": "2026-10-22",
+    "url": "https://arxiv.org/abs/2610.31916",
+    "why": "Examines whether recovering workflows still have authority to dispatch reconcile or retry an uncertain external effect.",
+    "code": "",
+    "note": "2026 preprint; 336 finite histories across native LangGraph and Temporal hosts; ancillary result files are linked from arXiv; no unrestricted production authorization guarantee."
   },
   {
     "id": "backupper",
@@ -46,6 +106,66 @@
     "why": "Benchmarks recognition and repair of inherited desktop errors over persistent workflows.",
     "code": "https://github.com/xu-hu-2002/CUA-Recovery",
     "note": "Paper reports 2250 test states."
+  },
+  {
+    "id": "rite-silent-errors",
+    "kind": "paper",
+    "area": "Recovery benchmark",
+    "title": "RITE: Evaluating End-to-End Resilience to Silent Tool Errors in E-Commerce Agentic Systems",
+    "year": 2026,
+    "date": "2026-10-20",
+    "url": "https://arxiv.org/abs/2610.27777",
+    "why": "Contrasts plausible incorrect tool values with correct values and explicit failures to measure recognition verification and end-task recovery.",
+    "code": "",
+    "note": "2026 preprint; 501 instances from 167 matched units and nine e-commerce workflows; domain-specific simulated tool behavior."
+  },
+  {
+    "id": "agent-reflex-training",
+    "kind": "paper",
+    "area": "Self-recovery",
+    "title": "Agent-Reflex: Teaching Language Agents to Act Reflectively",
+    "year": 2026,
+    "date": "2026-10-13",
+    "url": "https://arxiv.org/abs/2610.17953",
+    "why": "Releases perturbation-grounded reflection skills and training recipes for recovering from noisy tools and user corrections.",
+    "code": "https://github.com/RUC-NLPIR/Agent-Reflex",
+    "note": "2026 work-in-progress preprint; code model weights and data are released; training/benchmark robustness is not proof of real external effect repair."
+  },
+  {
+    "id": "messages-go-wrong",
+    "kind": "paper",
+    "area": "Multi-agent containment",
+    "title": "When Messages Go Wrong: Understanding Communication Faults in LLM-Based Multi-Agent Systems",
+    "year": 2026,
+    "date": "2026-10-11",
+    "url": "https://arxiv.org/abs/2610.15459",
+    "why": "Injects message loss delays and partial content and measures propagation and evidence recovery across multi-agent topologies.",
+    "code": "https://github.com/SonGoKu21/mas_communication",
+    "note": "2026 preprint; more than 29,000 author-reported executions across 100 tasks; recovery depends on surviving independent evidence paths."
+  },
+  {
+    "id": "sscbench",
+    "kind": "paper",
+    "area": "Recovery benchmark",
+    "title": "SSCBench: Evaluating the Evidential Validity of Fault-Injection Tests for Tool-Using LLM Agents",
+    "year": 2026,
+    "date": "2026-10-08",
+    "url": "https://arxiv.org/abs/2610.11514",
+    "why": "Checks whether counterevidence was available before an agent first relied on an injected false assertion.",
+    "code": "",
+    "note": "2026 preprint; 1,191 faulted executions in two tau-bench environments; measures evidential conditions, not repaired outcomes."
+  },
+  {
+    "id": "loud-quiet-failures",
+    "kind": "paper",
+    "area": "Tool failure",
+    "title": "Loud Failures, Quiet Failures: Fault Detection and Recovery in Tool-Using Language Model Agents",
+    "year": 2026,
+    "date": "2026-10-07",
+    "url": "https://arxiv.org/abs/2610.10062",
+    "why": "Separately tracks noticing faulty tools replanning retry loops and task recovery for explicit versus silent errors.",
+    "code": "",
+    "note": "2026 preprint; 1,920 trials across 24 tasks; stochastic clean-run variation complicates fault-attributed recovery comparisons."
   },
   {
     "id": "undobench",
@@ -180,6 +300,18 @@
     "note": "EMNLP 2026; demonstrated on ALFWorld and TextCraft under fixed repair budgets, not real external writes."
   },
   {
+    "id": "retryrealistic-fabrication",
+    "kind": "paper",
+    "area": "Verification and reporting",
+    "title": "When Tools Fail, Agents Fabricate: Silent Failure and Verification-First Oversight in Tool-Using LLM Agents",
+    "year": 2026,
+    "date": "2026-10",
+    "url": "https://openreview.net/forum?id=HLCpv21u07",
+    "why": "RetryRealistic provides sandboxed real file SQLite and HTTP faults with correct fabricated and honest-failure outcome labels.",
+    "code": "https://github.com/Kingsford-Group/RetryRealistic",
+    "note": "NeurIPS 2026 workshop paper per author and released code; 30 tasks and nine fault types. The monitor cannot engage on never-signaled silent faults; OpenReview landing page may require login."
+  },
+  {
     "id": "toolmisusebench",
     "kind": "paper",
     "area": "Recovery benchmark",
@@ -214,6 +346,18 @@
     "why": "Pairs error diagnoses with candidate corrections and matched replay from common checkpoints when available.",
     "code": "",
     "note": "2026 arXiv preprint; 50228 pairs and 3062 matched reruns are author-reported; resettable environments only."
+  },
+  {
+    "id": "failure-transparent-agents",
+    "kind": "paper",
+    "area": "Verification and reporting",
+    "title": "Failure-Transparent Agents: Benchmarking Post-Failure Reporting in Tool-Using Language Models",
+    "year": 2026,
+    "date": "2026-09-28",
+    "url": "https://arxiv.org/abs/2609.35732",
+    "why": "Benchmarks unsupported completion claims after failed tool observations and evaluates an evidence-structured status response.",
+    "code": "",
+    "note": "2026 preprint; author-reported 3,600 responses in synthetic blocked-task cases; reporting accuracy does not equal actual task recovery."
   },
   {
     "id": "same-winners",
@@ -298,6 +442,18 @@
     "why": "Traverse labels mistakes and Scout predicts first-error locations.",
     "code": "",
     "note": "Authors report 2518 trajectories and 6967 mistakes."
+  },
+  {
+    "id": "revise-online-workflows",
+    "kind": "paper",
+    "area": "Checkpoint and restore",
+    "title": "REVISE: Validity-Guided Recovery for Online Revisions in Agent Workflows",
+    "year": 2026,
+    "date": "2026-09-01",
+    "url": "https://arxiv.org/abs/2609.00643",
+    "why": "Uses workflow dependency provenance to retain still-valid work and recompute only the portions invalidated by a live revision.",
+    "code": "",
+    "note": "2026 preprint; 300 evaluated revision/commit cases on structured DAG workflows. Addresses changing instructions and stale work rather than all runtime failures."
   },
   {
     "id": "agent-error-simulator",
