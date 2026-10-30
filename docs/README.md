@@ -5,6 +5,7 @@
 | I want to… | Start here | Follow with |
 | --- | --- | --- |
 | Decide what to do after a tool timeout or ambiguous write | [Recovery field guide](field-guide.md) | [Decision flow](../README.md#the-agent-recovery-decision-flow) |
+| Audit MCP fault injection, stale subagent responses, and false-success reporting | [30 October 2026 research review](research-update-2026-10-30.md) | [Benchmarks](benchmarks.md) |
 | Understand idempotency, late commits, compensation and effect ledgers | [Transactional recovery review](research-update-2026-10-29-transactional.md) | [Production boundaries](production-systems.md) |
 | Diagnose a long-horizon trajectory | [Failure localization papers](../README.md#failure-detection-localization-and-diagnosis) | [Previous research review](research-update-2026-10-29.md) |
 | Choose a benchmark or fault-injection protocol | [Benchmarks and evaluation](benchmarks.md) | [Recovery-specific metrics](benchmarks.md#side-effect-correctness-and-the-recovery-denominator) |
