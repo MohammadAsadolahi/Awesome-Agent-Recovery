@@ -1,6 +1,6 @@
 # Agent Recovery: Field Guide
 
-_Updated 2026-10-29. Engineering synthesis; not a production-safety certification._
+_Updated 2026-10-30. Engineering synthesis; not a production-safety certification._
 
 ## Recovery starts with external truth
 
@@ -32,6 +32,14 @@ A language model can recover its conversation while the actual state of a filesy
 For multi-step operations, use a stable business-operation ID propagated to each write, record which subeffects committed, and make the **retry/compensation boundary explicit**. [SagaLLM](https://doi.org/10.14778/3750601.3750611), [Atomix](https://arxiv.org/abs/2602.14849), [RAC](https://arxiv.org/abs/2605.03409) and [DelAct](https://doi.org/10.1109/IWQoS70441.2026.11661202) investigate different transaction and settlement mechanisms, but each requires tool-contract assumptions. Compensation can itself fail, have fees, or leave visible residual effects.
 
 Where possible, compare *expected authorized effects* with actual persistent effects before continuing: [EffectMatch](https://arxiv.org/abs/2609.31301) investigates this in a controlled execution boundary. Log the effect history as well as the final success claim.
+
+## Verify authorization and truthful failure reporting
+
+A crash-safe checkpoint does not preserve permission to make a new request forever. [Permission to Retry](https://arxiv.org/abs/2610.31916) distinguishes current authorization to **dispatch**, authority to **reconcile**, and evidence about which effects already occurred. Recheck the relevant principal and policy before continuing a deferred or compensated action.
+
+A successful-looking tool response can still be semantically wrong. For critical decisions, use a separately grounded state check; [RITE](https://arxiv.org/abs/2610.27777) illustrates the silent-error exposure problem. A final agent message should distinguish verified completion from **uncertain**, **failed**, and **not attempted** states, and cite actual observations rather than generating fabricated success. See [Failure-Transparent Agents](https://arxiv.org/abs/2609.35732).
+
+For multi-agent workflows, asynchronous results can arrive after the task has changed. Preserve dependency-valid progress, invalidate affected results and re-verify downstream state; [Async-RBench](https://arxiv.org/abs/2610.32429) and [REVISE](https://arxiv.org/abs/2609.00643) investigate these controlled settings. These are not substitutes for application-specific external effect contracts.
 
 ## Example: lost response after committed write
 
@@ -68,4 +76,4 @@ Methods such as [AgentRx](https://aclanthology.org/2026.findings-emnlp.598/) and
 | Overwritten files | Restore snapshot, run checks |
 | Irreversible uncertain effect | Stop or escalate |
 
-See [benchmarks](benchmarks.md), [production systems](production-systems.md) and the [transactional recovery research review](research-update-2026-10-29-transactional.md).
+See the [30 October research review](research-update-2026-10-30.md), [benchmarks](benchmarks.md), [production systems](production-systems.md) and the [transactional recovery research review](research-update-2026-10-29-transactional.md).
