@@ -2,7 +2,7 @@
 
 [![Awesome](https://awesome.re/badge-flat.svg)](https://awesome.re)
 [![Quality checks](https://github.com/MohammadAsadolahi/Awesome-Agent-Recovery/actions/workflows/quality.yml/badge.svg)](https://github.com/MohammadAsadolahi/Awesome-Agent-Recovery/actions/workflows/quality.yml)
-[![Curated resources](https://img.shields.io/badge/curated_resources-79-2563eb)](data/resources.csv)
+[![Curated resources](https://img.shields.io/badge/curated_resources-102-2563eb)](data/resources.csv)
 [![Metadata license: CC0 1.0](https://img.shields.io/badge/metadata_license-CC0--1.0-16a34a)](LICENSE)
 [![Contributions welcome](https://img.shields.io/badge/contributions-welcome-8b5cf6)](CONTRIBUTING.md)
 
@@ -20,7 +20,7 @@
 > [!IMPORTANT]
 > **Agent state is not external truth.** A conversation checkpoint, a successful tool response or a completed workflow is not proof that a payment, booking, message or database mutation was correctly applied. After ambiguous writes, first inspect authoritative state and the tool contract. A retry can be unsafe even after an empty read-back if an earlier request is still in flight.
 
-**Last curated review:** 30 October 2026. The index currently contains **79 resources** (research, benchmark artifacts, engineering guides and related collections). Paper scores are **author-reported** unless expressly identified as independently reproduced. The local example is a **simulation**, not a production transaction engine.
+**Last curated review:** 3 November 2026. The index currently contains **102 resources** (research, benchmark artifacts, engineering guides and related collections). Paper scores are **author-reported** unless expressly identified as independently reproduced. The local example is a **simulation**, not a production transaction engine.
 
 ## Contents
 
@@ -73,7 +73,7 @@ Choose a reading path based on the problem you are solving.
 | **How do I measure recovery independently of task competence?** | [GUI-RobustEval](https://proceedings.mlr.press/v306/bu26b.html) · [ToolMisuseBench](https://aclanthology.org/2026.realm-1.28/) · [ParaRecover](https://aclanthology.org/2026.emnlp-main.975/) | Controlled recovery cases for GUI, sequential and parallel tool use |
 | **What survives process crashes and sandbox damage?** | [AgentRewind](https://arxiv.org/abs/2608.14380) · [Crab](https://arxiv.org/abs/2604.28138) · [production comparison](docs/production-systems.md) | Separates workflow, context, sandbox and external-state persistence |
 
-**Latest research review:** [MCP faults, asynchronous recovery, evaluator alignment, and verification — 30 October 2026](docs/research-update-2026-10-30.md) evaluates 13 papers against prior entries, including exclusions and implementation evidence. Earlier reviews: [transactional recovery](docs/research-update-2026-10-29-transactional.md) and [failure diagnosis](docs/research-update-2026-10-29.md).
+**Latest research review:** [Verified recovery research additions — 3 November 2026](docs/research-update-2026-11-03.md). Previous: [MCP faults, asynchronous recovery, evaluator alignment, and verification — 30 October 2026](docs/research-update-2026-10-30.md) evaluates 13 papers against prior entries, including exclusions and implementation evidence. Earlier reviews: [transactional recovery](docs/research-update-2026-10-29-transactional.md) and [failure diagnosis](docs/research-update-2026-10-29.md).
 
 ### Newly added research: 30 October 2026
 
@@ -138,6 +138,10 @@ The selections below are grouped by **what can fail and what can actually be rep
 
 ### Transactional recovery and side-effect integrity
 
+- [Evidence-Guided Recovery for AI Agents with Ambiguous Tool Outcomes and Partial Execution](https://arxiv.org/abs/2610.41453) (2026 preprint) — Plans evidence-constrained recovery after ambiguous commits and partial execution; independently replays certified outcomes.
+- [Cordon: Semantic Transactions for Tool-Using LLM Agents](https://arxiv.org/abs/2606.17573) (2026 preprint) — Stages and validates multi-step agent effects before commit using a task-scoped transaction boundary.
+- [Engineering Reliable Commit Gates for Agentic AI: Cost-Aware Verification Portfolios under Common-Mode Data Failures](https://arxiv.org/abs/2609.10969) (2026 preprint) — Measures unsafe agent commits and lost-response duplicates under source-diverse verification and atomic guards.
+
 - [Permission to Retry](https://arxiv.org/abs/2610.31916) (2026 preprint) — Tests whether retained state and changed authorization still permit dispatch, reconciliation or reattempt after a crash.
 *Safe retries, compensation, commit control, effect verification and durable boundaries.*
 
@@ -155,6 +159,9 @@ The selections below are grouped by **what can fail and what can actually be rep
 
 ### Failure detection, localization, and diagnosis
 
+- [From Credit Assignment to Repair: A Leakage-Controlled Diagnostic Study of Tool-Using Agents](https://aclanthology.org/2026.realm-1.15/) (REALM 2026) — Tests the diagnosis-to-repair link and finds that localized errors do not automatically produce successful intervention.
+- [REFLECT: Intervention-Supported Error Attribution for Silent Failures in LLM Agent Traces](https://arxiv.org/abs/2606.09071) (2026 preprint) — Refines silent-failure attribution using controlled patches and outcome-flip replay evidence.
+
 *Evidence about which step actually caused failure, not just which trace ended unsuccessfully.*
 
 - [Locating Hidden Failures / Traverse](https://arxiv.org/abs/2609.17930) (2026) — Dataset and Scout verifier for early causal mistakes.
@@ -169,6 +176,17 @@ The selections below are grouped by **what can fail and what can actually be rep
 - [Survey for LLM Agent Trajectory Analysis](https://doi.org/10.1109/TSE.2026.3717765) (2026) — Broader background in tracing, diagnosis and failure attribution.
 
 ### Tool failures, intervention, and self-recovery
+
+- [Verify--Backtrack Loop: Structured Precondition Recovery for Long-Horizon Language Agents](https://arxiv.org/abs/2610.41564) (2026 preprint) — Verifies active and terminal goals, then applies typed retry or bounded goal-stack backtracking.
+- [AgentHeal: Evaluating Goal-Preserving Resource Recovery of Web Agents under Access Barriers](https://arxiv.org/abs/2610.39234) (2026 preprint) — Benchmarks legitimate rerouting and constraint preservation when web resources are inaccessible.
+- [PRFC: Learning Progressive Recovery from Function Calling Errors for Tool-Using LLMs](https://aclanthology.org/2026.findings-emnlp.1762/) (EMNLP Findings 2026) — Uses progress-aware reinforcement learning to improve successive tool-call corrections after failures.
+- [When Harnesses Lose the Signal: Causal Evaluation of Recovery in LLM Agents](https://arxiv.org/abs/2610.00372) (2026 preprint) — Separates rescues from harms using paired recovery interventions and a pre-intervention routing policy.
+- [Diagnosis Before Recovery: Turning Agent Failures into Selective Self-Correction](https://arxiv.org/abs/2608.11772) (2026 preprint) — Selects compatible correction tools from observed failure classes instead of blindly retrying.
+- [Robust Tool Use via Fission-GRPO: Learning to Recover from Execution Errors](https://aclanthology.org/2026.acl-long.1880/) (ACL 2026) — Uses error feedback and on-policy corrective rollouts to train tool-failure recovery.
+- [Wink: Recovering from Misbehaviors in Coding Agents](https://arxiv.org/abs/2602.17037) (2026 preprint) — Detects specification drift, reasoning loops and tool-call failures in coding agents and nudges recovery.
+- [AgentCheck: A Reproduce-Intervene-Mitigate Workbench for LLM Agents over MCP](https://arxiv.org/abs/2607.11098) (2026 preprint) — Reproduces MCP failures and validates mitigations by replaying matched fault conditions.
+- [Beyond Function Calling: Benchmarking Tool-Using Agents under Tool-Environment Unreliability](https://arxiv.org/abs/2606.25819) (2026 preprint) — ToolBench-X injects recoverable specification, invocation, execution, output and source-conflict faults.
+- [Failure makes the agent stronger: Enhancing Accuracy through Structured Reflection for Reliable Tool Interactions](https://aclanthology.org/2026.findings-acl.618/) (ACL Findings 2026) — Trains and evaluates the failure → diagnosis → corrected tool-call sequence.
 
 - [Tool-Calling LLM Agents Under Realistic MCP Faults / MCP-Injector](https://arxiv.org/abs/2610.32555) (2026 preprint; authors report NeurIPS 2026 acceptance) — Injects seeded persistent/transient/intermittent MCP failures derived from public ecosystem issue evidence. [Code and data](https://gitlab.com/uniluxembourg/snt/sedan/papers/mcp-injector).
 - [RITE: Evaluating End-to-End Resilience to Silent Tool Errors](https://arxiv.org/abs/2610.27777) (2026 preprint) — Matched explicit failures and plausible-but-wrong results test recognition, verification and eventual task outcome.
@@ -188,6 +206,12 @@ The selections below are grouped by **what can fail and what can actually be rep
 
 ### Checkpointing, restoration, and reversibility
 
+- [StateWise: Diagnosing and Repairing Persistent Operational State Before Agent Actions](https://arxiv.org/abs/2610.05241) (2026 preprint) — Repairs stale or invalid persistent operational records, replans and checks actions before proceeding.
+- [Rollback the World, Keep the Reflection: Rollback-Induced Reflection for Long-Horizon LLM Agents](https://arxiv.org/abs/2609.18304) (2026 preprint) — Jointly selects rollback boundary and retained reflection after long-horizon agent failures.
+- [ACRFence: Preventing Semantic Rollback Attacks in Agent Checkpoint-Restore](https://arxiv.org/abs/2603.20625) (2026 preprint) — Mitigates changed-intent replay and authority resurrection after checkpoint restoration.
+- [From Faulty Memories to Corrected Actions: Dependency-Guided Rollback Repair for Memory-Augmented Agents](https://arxiv.org/abs/2608.10502) (2026 preprint) — Selectively repairs corrupted persistent agent memories and dependent actions without clearing benign state.
+- [Repair the Core, Not the Symptom: Planning-Graph Repair for Long-Horizon Agents](https://arxiv.org/abs/2607.01767) (2026 preprint) — Finds and repairs compact causal cores in failed planning graphs while retaining valid nodes.
+
 - [REVISE: Validity-Guided Recovery for Online Revisions](https://arxiv.org/abs/2609.00643) (2026 preprint) — Tracks workflow dependencies to preserve valid completed work after instruction revisions while recomputing affected branches.
 
 *What can be rolled back, how much progress survives and which effects remain outside a snapshot.*
@@ -199,6 +223,10 @@ The selections below are grouped by **what can fail and what can actually be rep
 - [Self-Healing Harness for Agent Self-Modification](https://arxiv.org/abs/2609.24130) (2026) — Regression gates for executable self-modifications.
 
 ### Multi-agent and security incident recovery
+
+- [Dittany: Contribution-Guided Repair Framework for MAS Applications](https://arxiv.org/abs/2610.42144) (2026 preprint) — Repairs incomplete multi-agent executions at action or dependency-graph level, retaining validated work.
+- [ARIA: Runtime Inspection and Amendment for Multi-Agent Systems](https://arxiv.org/abs/2610.20780) (2026 preprint) — Learns runtime multi-agent interventions from execution-verified repair trajectories.
+- [HiP-LR: Hierarchical Planning with Localized Failure Recovery for Long-Horizon Multi-Robot Tasks](https://aclanthology.org/2026.findings-emnlp.1835/) (EMNLP Findings 2026) — Confines multi-robot agent fault recovery to affected dependency groups and avoids global halts.
 
 - [When Messages Go Wrong](https://arxiv.org/abs/2610.15459) (2026 preprint) — Tests message loss, delay and partial content and compares evidence-preserving multi-agent architectures. [Code and artifacts](https://github.com/SonGoKu21/mas_communication).
 - [Async-RBench](https://arxiv.org/abs/2610.32429) (2026 preprint) — Executable asynchronous result-delivery scenarios, including stale updates, duplicates and failed subagents. [Code](https://github.com/pope8zdt/Async-RBench).
