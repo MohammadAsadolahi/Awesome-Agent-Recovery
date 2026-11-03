@@ -32,7 +32,7 @@ A source can be in scope even if it only evaluates **detection or attribution**,
 
 ## Latest admission and rejection review
 
-The [3 November evidence review](research-update-2026-11-03.md) documents 23 additional publication-only admissions and exclusions. The [30 October evidence review](research-update-2026-10-30.md) documents 13 screened additions, primary sources, code-link inspection, overlaps and deferred papers. For **reporting reliability**, label unsupported success separately from actual task recovery. For **repair ranking**, name the deployed executor and evaluator. For **fault-injection validity**, record whether corrective evidence appeared before first erroneous reliance.
+The [3 November follow-up review](research-update-2026-11-03-followup.md) documents 14 additional recovery-specific publications and 3 further exclusions. The [3 November evidence review](research-update-2026-11-03.md) documents 23 publication-only admissions and exclusions. The [30 October evidence review](research-update-2026-10-30.md) documents 13 screened additions, primary sources, code-link inspection, overlaps and deferred papers. For **reporting reliability**, label unsupported success separately from actual task recovery. For **repair ranking**, name the deployed executor and evaluator. For **fault-injection validity**, record whether corrective evidence appeared before first erroneous reliance.
 
 ## How this differs from existing lists
 
