@@ -1,26 +1,21 @@
-# Documentation directory
+# Documentation
 
-**Awesome Agent Recovery** is a curated, evidence-first guide to agent failure detection, safe intervention, environment repair, durable execution and independently verified recovery.
+**A focused research bibliography about recovering failed tool-using LLM agents.** Start with the [main 57-paper index](../README.md) rather than dated historical collections.
 
-| I want to… | Start here | Follow with |
-| --- | --- | --- |
-| Review new agent failure/recovery publications and exclusion decisions | [4 November publication-only research update](research-update-2026-11-04.md) | [Curation rules](research-decision.md) |
-| Decide what to do after a tool timeout or ambiguous write | [Recovery field guide](field-guide.md) | [Decision flow](../README.md#the-agent-recovery-decision-flow) |
-| Evaluate restart choices, replay integrity, and agent-tool contract anomalies | [3 November follow-up research review](research-update-2026-11-03-followup.md) | [Research papers](../README.md#research-papers) |
-| Review evidence-guided agent recovery, safe replay and selective repair | [3 November 2026 research review](research-update-2026-11-03.md) | [Main research sections](../README.md#research-papers) |
-| Audit MCP fault injection, stale subagent responses, and false-success reporting | [30 October 2026 research review](research-update-2026-10-30.md) | [Benchmarks](benchmarks.md) |
-| Understand idempotency, late commits, compensation and effect ledgers | [Transactional recovery review](research-update-2026-10-29-transactional.md) | [Production boundaries](production-systems.md) |
-| Diagnose a long-horizon trajectory | [Failure localization papers](../README.md#failure-detection-localization-and-diagnosis) | [Previous research review](research-update-2026-10-29.md) |
-| Choose a benchmark or fault-injection protocol | [Benchmarks and evaluation](benchmarks.md) | [Recovery-specific metrics](benchmarks.md#side-effect-correctness-and-the-recovery-denominator) |
-| Compare workflow durability and checkpoint implementations | [Production systems](production-systems.md) | [Controlled simulation](../examples/ambiguous_write_demo.py) |
-| Find definitions and interpretation guidance | [FAQ](faq.md) | [Curation policy](research-decision.md) |
-| Contribute another paper or correction | [Contributing](../CONTRIBUTING.md) | [Catalog](../data/resources.csv) |
+| Need | Document |
+| --- | --- |
+| Find and compare high-value recovery publications | [Curated README](../README.md#curated-papers) |
+| Understand the strict inclusion/exclusion test | [Curation and evidence policy](research-decision.md) |
+| See why each prior item was kept or removed | [Complete 4 November 2026 audit](curation-audit-2026-11-04.md) |
+| Choose benchmarks and recovery outcome measures | [Benchmark protocol](benchmarks.md) |
+| Handle ambiguous effects, bounded retry and restoration | [Recovery field guide](field-guide.md) |
+| Get answers to common recovery questions | [Focused FAQ](faq.md) |
+| Submit a directly relevant publication | [Contribution guide](../CONTRIBUTING.md) |
+| Work with machine-readable sources | [CSV](../data/resources.csv) · [JSON](../data/resources.json) |
 
-## Catalog conventions
+## Reproducible maintenance
 
-[CSV](../data/resources.csv) is the **single editorial source of truth**; [JSON](../data/resources.json) is a synchronized derived representation. Both include IDs, kind, area, canonical URL, year/date, a one-sentence reason for inclusion, an optional code link, and an evidence/limitations note.
-
-To validate a change:
+The only editable catalog is `data/resources.csv`; the JSON copy is generated and kept in sync:
 
 ```bash
 python scripts/validate.py --sync-json
@@ -28,4 +23,4 @@ python scripts/validate.py
 python -m unittest discover -s tests
 ```
 
-The [main README](../README.md) deliberately favors **reading paths and decision aids**. Detailed evidence qualifications and experimental assumptions belong in these guides rather than in inflated README claims.
+The catalog contains **57 original research publications** as of 4 November 2026. General runtime/product catalogs and prior superseded research roundups are no longer part of the active repository; their history remains available through Git.
