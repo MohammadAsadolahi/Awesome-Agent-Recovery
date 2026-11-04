@@ -4,6 +4,7 @@
 
 | I want to… | Start here | Follow with |
 | --- | --- | --- |
+| Review new agent failure/recovery publications and exclusion decisions | [4 November publication-only research update](research-update-2026-11-04.md) | [Curation rules](research-decision.md) |
 | Decide what to do after a tool timeout or ambiguous write | [Recovery field guide](field-guide.md) | [Decision flow](../README.md#the-agent-recovery-decision-flow) |
 | Evaluate restart choices, replay integrity, and agent-tool contract anomalies | [3 November follow-up research review](research-update-2026-11-03-followup.md) | [Research papers](../README.md#research-papers) |
 | Review evidence-guided agent recovery, safe replay and selective repair | [3 November 2026 research review](research-update-2026-11-03.md) | [Main research sections](../README.md#research-papers) |
