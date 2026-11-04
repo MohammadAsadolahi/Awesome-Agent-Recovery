@@ -1,6 +1,6 @@
 # Benchmarks and Evaluation Protocol
 
-_Updated 2026-10-30. Numbers below are as reported by authors, not independently reproduced._
+_Updated 2026-11-04. Numbers below are as reported by authors, not independently reproduced._
 
 ## Recovery-specific benchmarks
 
@@ -8,6 +8,13 @@ _Updated 2026-10-30. Numbers below are as reported by authors, not independently
 
 | Benchmark | Paper | Target failure | Caution |
 | --- | --- | --- | --- |
+| MAST-Data | [Why Do Multi-Agent LLM Systems Fail?](https://papers.nips.cc/paper_files/paper/2025/hash/b1041e52d3be19f0a9bc491657488e4a-Abstract-Datasets_and_Benchmarks_Track.html) | 1600+ annotated traces and 14 failure modes in multi-agent systems | Failure taxonomy and labels, not measured successful recovery |
+| TraceElephant | [Seeing the Whole Elephant](https://aclanthology.org/2026.acl-long.912/) | Full-observability MAS attribution with reproducible environments | Extra context changes root-cause attribution; no downstream repaired task guaranteed |
+| MP-Bench | [Multi-Perspective Failure Attribution](https://arxiv.org/abs/2603.25001) | Multiple defensible attributions to a complex MAS failure | Single-reference error accuracy is insufficient; no effect repair scored |
+| AgentFail | [Platform-Orchestrated Root Causes](https://arxiv.org/abs/2509.23735) | 307 labeled failures from ten platform-orchestrated systems | Attributed root cause is not proof of recovered environment state |
+| AgentErrorBench | [AgentDebug](https://arxiv.org/abs/2509.25370) | Modular failure taxonomy, root-cause debugging and tested recovery feedback | Original paper is distinct from AgentDebugX toolkit; 2025 preprint |
+| AgentForesight / AFTraj-2K | [Online Failure Auditing](https://arxiv.org/abs/2605.08715) | Prefix-only detection and first critical error alarms | Judge-consensus failure onset and cost of premature interruption |
+| Hardware-fault resilience | [How Hardware Faults Manifest in Agents](https://arxiv.org/abs/2610.12756) | 6814 controlled fault/clean agent executions tracing spontaneous self-recovery | Fault manifestation study, not a direct recovery controller |
 | MCP-Injector | [Realistic MCP Faults](https://arxiv.org/abs/2610.32555) | Incident-derived protocol fault persistence across tested model/stacks | Two tested model sizes; no general scale conclusion |
 | RITE | [Silent Tool Errors](https://arxiv.org/abs/2610.27777) | 501 paired correct/explicit/silent-condition instances | E-commerce workflows and frozen tools |
 | Async-RBench | [Asynchronous Task Execution](https://arxiv.org/abs/2610.32429) | 200 executable tasks in eight subagent-result scenarios | Replanning score not equivalent to task success |
@@ -47,6 +54,14 @@ Failure phase matters: `PRE_MUTATION`, `DURING_MUTATION`, and `POST_MUTATION_PRE
 
 [Same Winners, Different Success Rates](https://arxiv.org/abs/2609.34215) demonstrates that high checkpoint action-ranking agreement can coexist with near-zero absolute success. Report agreement, all-zero fraction, held-out success and pooled success together when evaluating checkpoint policies.
 
+## Additional evaluation threats: attribution ambiguity and safe intervention
+
+- **Incomplete logs:** [TraceElephant](https://aclanthology.org/2026.acl-long.912/) shows developer-visible inputs and metadata change failure-attribution scores. Name the actual observability level when reproducing attribution.
+- **Ambiguous root cause:** [MP-Bench](https://arxiv.org/abs/2603.25001) argues that multi-agent failures may have several defensible explanations; report reference adjudication and ambiguity rather than presenting a single label as unquestionable truth.
+- **Online alarm economics:** [AgentForesight](https://arxiv.org/abs/2605.08715) evaluates prefix-only monitoring, while [Fail-Fast, Restart-Smart](https://arxiv.org/abs/2608.03222) measures false alarms, compute saved and same-policy restart with retained diffs. Detection accuracy alone is not a cost-beneficial recovery policy.
+- **Repair target mismatch:** [Self-Direction](https://arxiv.org/abs/2610.31846) tests persisted lesson adapters on future tasks; [LAST-CQ](https://aclanthology.org/2026.realm-1.53/) tests correction-triggered database query reruns. Neither result proves safe external-write restoration.
+- **Formal-model boundary:** [TraceFix](https://doi.org/10.1145/3786335.3813159) checks bounded modeled coordination properties and repairs the specification; distinguish those from unverified semantics or liveness in the deployed world.
+
 ## New evaluation threats: executor mismatch and missing evidence
 
 - [Repairs for Whom?](https://arxiv.org/abs/2610.38610) shows that a repair scored with a stronger evaluator can be less valuable when the deployed agent executes it. Record **both evaluator and executor models**, and validate selected fixes on the actual executor.
@@ -78,4 +93,4 @@ Do not label future scenarios implemented before their tests exist.
 | 4. Execute | Successful rerun after recovery attempt | Controlled restart and no-recovery baseline |
 | 5. Verify | Correct external state, no duplicate/irreversible collateral effects | Independent authoritative checks and side-effect ledger |
 
-An improved diagnosis score does **not** imply improved safe recovery. Report the **denominator** for recovery (failed cases vs all tasks), whether the restart point is human-labeled or predicted, and whether the environment is resettable. See the [30 October evidence review](research-update-2026-10-30.md), [transactional recovery review](research-update-2026-10-29-transactional.md) and [earlier diagnostics review](research-update-2026-10-29.md) for paper-specific caveats.
+An improved diagnosis score does **not** imply improved safe recovery. Report the **denominator** for recovery (failed cases vs all tasks), whether the restart point is human-labeled or predicted, and whether the environment is resettable. See the [4 November publication-only review](research-update-2026-11-04.md), [30 October evidence review](research-update-2026-10-30.md), [transactional recovery review](research-update-2026-10-29-transactional.md) and [earlier diagnostics review](research-update-2026-10-29.md) for paper-specific caveats.
