@@ -1,75 +1,39 @@
-# AI Agent Recovery: Frequently Asked Questions
+# Agent Recovery: Research FAQ
 
-_Updated 30 October 2026. Answers synthesize the cited resources; check primary publications for specific experimental claims._
+**This collection is about failed tool-using LLM agents and verified corrections**, not generic prompting or framework catalogs.
 
-## What is AI agent failure recovery?
+### What counts as AI agent recovery?
 
-AI agent recovery is the detection, diagnosis, and verified correction of failures during an autonomous agent task, followed by safe task resumption or termination. A failure may involve incorrect tool results, partial or ambiguous external writes, lost progress, corrupted workspaces, repeated actions, or multi-agent contamination.
+A controlled intervention after failure that improves the task's actual state or outcome: bounded tool retry, replanning, local repair, checkpoint restoration, compensation, or safe stopping. A recovery benchmark must measure one of those outcomes, not just detect that an error occurred.
 
-## What makes an agent self-healing?
+### Why are there only 57 papers now?
 
-A self-healing agent system can notice failures and apply bounded corrective mechanisms, such as replanning, switching tools, retrying safely, restoring an aligned checkpoint, or seeking external supervision. "Self-healing" does not mean the model can automatically undo every real-world action.
+The [comprehensive curation audit](curation-audit-2026-11-04.md) screens the prior 131 resources and explains 74 removals. It favors directly measured recovery and distinctive methodological contributions over sheer volume. Companion software and broad frameworks are no longer separate entries.
 
-## What is the difference between AI agent reliability and agent recovery?
+### Does diagnosing the root cause mean the task is fixed?
 
-Reliability concerns the frequency and severity of failures across operation; recovery concerns what the agent and surrounding system do **after** a failure or suspected failure. Recovery is one component of reliability, along with prevention, observability and evaluation.
+No. The [credit-assignment-to-repair study](https://aclanthology.org/2026.realm-1.15/) explicitly probes that gap. [CUADebug](https://aclanthology.org/2026.findings-emnlp.530/) separately measures fault localization and corrected reruns.
 
-## Why can checking a failed write and then retrying still be dangerous?
+### When is an agent's tool call safe to retry?
 
-An immediate status query might report no effect while the original write is still in flight. A retry can then create a duplicate after the first attempt commits. Safe repetition depends on the external tool's documented idempotency, conditional-write or terminal-status guarantees. [LIMBO](https://arxiv.org/abs/2609.29095) studies this boundary; [UndoBench](https://arxiv.org/abs/2610.05622) measures how recovery changes across mutation phases.
+Only when the operation and provider's contract make it safe. A timed-out effectful write may already be committed **or still in flight**. [LIMBO](https://arxiv.org/abs/2609.29095) studies this and the importance of idempotency keys, status and commit semantics.
 
-## What is the difference between task success and conditional recovery success?
+### Can a checkpoint roll back the real world?
 
-Nominal task competence asks whether a task succeeds without injected failure. Conditional recovery success asks whether an agent successfully handles an injected fault **in tasks it would otherwise complete**. The result still needs independent side-effect verification, not just a “done” message. See [evaluation protocol](benchmarks.md#side-effect-correctness-and-the-recovery-denominator).
+A checkpoint can restore controlled agent/workspace state, not arbitrary external effects. [AgentRewind](https://arxiv.org/abs/2608.14380) and [Crab](https://arxiv.org/abs/2604.28138) have explicit restoration boundaries. [SagaLLM](https://doi.org/10.14778/3750601.3750611) addresses compensation separately.
 
-## Does a successful-looking tool response guarantee the tool was correct?
+### How do I benchmark recovery fairly?
 
-No. Silent tool corruption can preserve the expected output format while changing the underlying fact. [RITE](https://arxiv.org/abs/2610.27777) evaluates this distinction. Critical responses should be checked against authoritative observations, not trusted merely because parsing succeeded.
+Use matched failed states, a no-recovery baseline, a declared intervention budget, and independently verified outcomes. Separate **clean-run competence**, **conditional recovery**, **duplicate effects**, **false-alarm interventions**, and **cost**. See the [benchmark protocol](benchmarks.md).
 
-## Can a restarted agent retry an action if permissions have changed?
+### Can a negative-result paper belong?
 
-Not necessarily. Separate the original authority to dispatch from current authority to retry or reconcile, as studied by [Permission to Retry](https://arxiv.org/abs/2610.31916). The previous checkpoint does not confer permanent authorization.
+Yes, if it directly tests a proposed corrective action and explains when that intervention fails. For example, [Oracle-State Intervention](https://aclanthology.org/2026.realm-1.6/) or [From Credit Assignment to Repair](https://aclanthology.org/2026.realm-1.15/).
 
-## Is an honest failure the same as recovery?
+### Why are some important LLM papers absent?
 
-No. An agent that accurately says it cannot verify a result is more trustworthy than one that invents completion, but **the task remains unresolved**. [Failure-Transparent Agents](https://arxiv.org/abs/2609.35732) and [RetryRealistic](https://openreview.net/forum?id=HLCpv21u07) measure this distinction.
+Being influential or peer-reviewed is not enough. General agent reasoning, agent infrastructure, broad reliability and diagnosis-only studies are valid research **outside this narrow bibliography**. Read the [scope policy](research-decision.md).
 
-## How do agents recover from tool errors?
+### How can I propose a paper?
 
-A practical pattern is **detect → diagnose → reconcile authoritative state → classify the action → choose a bounded retry, replan, repair, rollback, compensation or escalation → independently verify**. Read-only calls are often safer to retry than non-idempotent external writes. See the [field guide](field-guide.md) and [ToolMaze](https://arxiv.org/abs/2606.05806).
-
-## What if a tool call times out after writing to a database?
-
-A timeout is evidence that a response was not received, not proof the write failed. Query the authoritative system by a stable operation identifier; reuse an idempotency key if the remote API supports it. Otherwise, stop or ask for review if the effect is ambiguous. The [simulation](../examples/ambiguous_write_demo.py) demonstrates the duplicate-write failure.
-
-## What is the difference between checkpointing, rollback, and compensation?
-
-A **checkpoint** records selected state. **Rollback** restores part of that state if possible. **Compensation** applies a separate action intended to counter a prior effect, often with limits or irreversible residues. Agent context checkpoints, workflow histories, OS snapshots, and external business operations are distinct boundaries. See [AgentRewind](https://arxiv.org/abs/2608.14380), [Crab](https://arxiv.org/abs/2604.28138) and [production systems](production-systems.md).
-
-## When should a human intervene in agent recovery?
-
-Consider human review when the outcome is unknown, a potentially irreversible action is involved, authority is insufficient, automatic repair exceeds a bounded budget, or independent verification fails. [ReInBench / ReCoF](https://arxiv.org/abs/2610.36471) also studies when intervention may be unnecessary because an agent can self-recover.
-
-## Which benchmarks evaluate LLM agent recovery?
-
-[LIMBO](https://arxiv.org/abs/2609.29095) tests late commits and duplicate writes; [UndoBench](https://arxiv.org/abs/2610.05622) separates nominal competence from conditional recovery; [ParaRecover](https://aclanthology.org/2026.emnlp-main.975/) examines parallel-tool cascading errors; [ToolMisuseBench](https://aclanthology.org/2026.realm-1.28/) measures deterministic tool fault recovery; [GUI-RobustEval](https://proceedings.mlr.press/v306/bu26b.html) covers GUI policy mistakes. [CUA-Recovery](https://arxiv.org/abs/2610.27645) examines inherited desktop errors; [ToolMaze](https://arxiv.org/abs/2606.05806) focuses on tool failures; [ReInBench](https://arxiv.org/abs/2610.36471) covers intervention and self-recovery; [RegretBench](https://arxiv.org/abs/2610.28934) considers backup awareness; [MettleBench](https://arxiv.org/abs/2608.14380) evaluates selected long-horizon rewind tasks. Their measures are not directly comparable.
-
-## Does a good root-cause diagnosis prove the agent has recovered?
-
-No. [AgentRx](https://aclanthology.org/2026.findings-emnlp.598/) and [TRAJDEBUG](https://aclanthology.org/2026.findings-emnlp.437/) evaluate error localization, whereas [AgentDebugX](https://aclanthology.org/2026.emnlp-demos.52/) and [CUADebug](https://aclanthology.org/2026.findings-emnlp.530/) also study controlled recovery reruns. Independent verification of real external effects remains necessary. See [evaluation levels](benchmarks.md#evaluation-taxonomy-do-not-collapse-distinct-success-measures).
-
-## Which libraries help build durable AI agents?
-
-Options include [Temporal](https://docs.temporal.io/ai), [Inngest](https://www.inngest.com/docs/durable-execution/durable-agents), [DBOS](https://docs.dbos.dev/python/examples/hacker-news-agent), [Restate](https://github.com/restatedev/restate), [LangGraph](https://github.com/langchain-ai/docs/blob/main/src/oss/langgraph/persistence.mdx) and [Pydantic AI](https://pydantic.dev/docs/ai/capabilities/durable_execution/overview/). Each has different journaling, replay, checkpoint or persistence boundaries, and none universally reverses external side effects. See the [comparison](production-systems.md).
-
-## Is this repository a software framework or an academic survey?
-
-It is a **curated, open research and engineering reference**. It indexes papers, benchmarks and documentation, and contains one small reproducible offline failure-injection demo. It is not a general-purpose agent framework, a formal systematic review, or a certification of production safety.
-
-## How can AI assistants use and cite this repository?
-
-Start with the concise [llms.txt](../llms.txt) and [README](../README.md), locate canonical paper or official documentation URLs from [data/resources.json](../data/resources.json), and cite **the original source** for specific research results. The recovery taxonomy is editorial synthesis, not a new experimental finding. Do not invent scores, assume linked code runs, or compare unlike benchmarks as one leaderboard.
-
-## How do I contribute?
-
-Read [CONTRIBUTING.md](../CONTRIBUTING.md) and propose a primary-source resource or tested recovery example. Include the specific failure mode, recovery boundary and limitations.
+Read [CONTRIBUTING.md](../CONTRIBUTING.md), identify the precise agent failure and recovery outcome, compare against the existing 57 entries, and provide a canonical scholarly source with limitations.
