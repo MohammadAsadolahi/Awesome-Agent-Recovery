@@ -1,12 +1,14 @@
 # Scope, Curation and Evidence Policy
 
-_Reviewed 2026-11-03._
+_Reviewed 2026-11-04._
 
 ## Scope
 
 A resource belongs here if it directly helps **detect, diagnose, choose an intervention for, recover from, or measure failure** in autonomous agent systems. Includes tool failures, runtime intervention, safe retries, state reconciliation, rollback, workspace restoration, durable execution, and multi-agent fault containment.
 
-General agent framework lists, marketing catalogs and undemonstrated capabilities are out of scope.
+**Policy for new resource additions (4 November onward): only original scholarly research publications** (peer-reviewed conference/journal/workshop papers or explicitly labeled preprints) with a **central** contribution to AI agent failure, recovery, fault-specific diagnosis/attribution, targeted intervention, bounded restoration or verification. New entries must use `kind=paper`. Code/datasets are supporting links inside the research paper's row, never additional standalone entries. Existing historic framework/guide links remain as context, not as precedent for new additions.
+
+Do not add research primarily about an AI assistant **fixing someone else's software**, broad prompt/harness optimization without a studied agent failure, generic performance gains, standard algorithmic routing without agent execution faults, or surveys/tool directories. General agent framework lists, marketing catalogs and undemonstrated capabilities are out of scope.
 
 ## Evidence hierarchy
 
@@ -31,6 +33,8 @@ A source can be in scope even if it only evaluates **detection or attribution**,
 **Version caveat:** use primary proceedings when available. For a source available only through an OpenReview submission or arXiv, label it a submission/preprint without assuming formal acceptance.
 
 ## Latest admission and rejection review
+
+The [4 November 2026 publication review](research-update-2026-11-04.md) documents 15 directly relevant papers (NeurIPS/ACL/REALM/ACM proceedings and clearly labeled preprints), admission boundaries and explicit exclusions. Publication-only applies to **new rows**, not retroactive deletion of historical resources.
 
 The [3 November follow-up review](research-update-2026-11-03-followup.md) documents 14 additional recovery-specific publications and 3 further exclusions. The [3 November evidence review](research-update-2026-11-03.md) documents 23 publication-only admissions and exclusions. The [30 October evidence review](research-update-2026-10-30.md) documents 13 screened additions, primary sources, code-link inspection, overlaps and deferred papers. For **reporting reliability**, label unsupported success separately from actual task recovery. For **repair ranking**, name the deployed executor and evaluator. For **fault-injection validity**, record whether corrective evidence appeared before first erroneous reliance.
 

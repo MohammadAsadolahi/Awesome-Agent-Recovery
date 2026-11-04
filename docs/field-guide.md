@@ -1,6 +1,12 @@
 # Agent Recovery: Field Guide
 
-_Updated 2026-10-30. Engineering synthesis; not a production-safety certification._
+_Updated 2026-11-04. Engineering synthesis; not a production-safety certification._
+
+## Detection, repair and state verification are separate
+
+Even highly specific failure research has different endpoints. [TraceElephant](https://aclanthology.org/2026.acl-long.912/) improves *where a failure is attributed*; [AgentForesight](https://arxiv.org/abs/2605.08715) tries to *interrupt a causal mistake early*; [Fail-Fast, Restart-Smart](https://arxiv.org/abs/2608.03222) tries to *save compute and reuse valid code work*. None independently guarantees that externally committed effects are correct. [TraceFix](https://doi.org/10.1145/3786335.3813159) verifies modeled coordination properties and repairs protocol specifications, but not arbitrary remote state.
+
+Keep track of whether an intervention is detection-only, model-level learning, local workspace repair, replay under controlled state, physical scene restoration, or an actual compensating operation. For new evidence, see the [4 November publication review](research-update-2026-11-04.md).
 
 ## Recovery starts with external truth
 
