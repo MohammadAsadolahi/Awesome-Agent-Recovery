@@ -392,8 +392,8 @@
     "date": "2026-10-01",
     "url": "https://arxiv.org/abs/2610.01178",
     "why": "Discovers and trains executable robot recovery skills in digital twins then verifies scene restoration during real-robot rollouts.",
-    "code": "https://research.nvidia.com/labs/gear/recova/",
-    "note": "2026 preprint; real-robot and simulation results are author-reported. Physical restoration is task and scene dependent and not a software transaction guarantee."
+    "code": "",
+    "note": "2026 preprint; see author project https://research.nvidia.com/labs/gear/recova/. real-robot and simulation results are author-reported. Physical restoration is task and scene dependent and not a software transaction guarantee."
   },
   {
     "id": "safety-self-improvement",
