@@ -582,10 +582,10 @@
     "title": "Robust Agent Compensation (RAC): Teaching AI Agents to Compensate",
     "year": 2026,
     "date": "2026-05-05",
-    "url": "https://arxiv.org/abs/2605.03409",
+    "url": "https://doi.org/10.1145/3786335.3813141",
     "why": "Studies log-based compensation layers that track agent effects and support corrective execution.",
     "code": "",
-    "note": "2026 preprint; claims are evaluated in selected framework and benchmark environments, not arbitrary APIs."
+    "note": "ACM CAIS 2026; evaluated compensation in selected LangChain and agent benchmarks. Handler correctness and remote provider semantics remain conditional."
   },
   {
     "id": "crab",
