@@ -1,85 +1,42 @@
-# Agent Recovery: Field Guide
+# Recovery Field Guide
 
-_Updated 2026-11-04. Engineering synthesis; not a production-safety certification._
+**Scope:** tool-using language-model agents that have failed or entered an uncertain execution state. This is an engineering synthesis of selected research, **not** a production-safety certification.
 
-## Detection, repair and state verification are separate
+## Identify what failed
 
-Even highly specific failure research has different endpoints. [TraceElephant](https://aclanthology.org/2026.acl-long.912/) improves *where a failure is attributed*; [AgentForesight](https://arxiv.org/abs/2605.08715) tries to *interrupt a causal mistake early*; [Fail-Fast, Restart-Smart](https://arxiv.org/abs/2608.03222) tries to *save compute and reuse valid code work*. None independently guarantees that externally committed effects are correct. [TraceFix](https://doi.org/10.1145/3786335.3813159) verifies modeled coordination properties and repairs protocol specifications, but not arbitrary remote state.
+| Layer | Example | Research-guided response |
+| --- | --- | --- |
+| Tool response | Timeout, semantic corruption, broken endpoint | Classify retryability; check authoritative observations; capped retry, fallback or abstention ([ToolMaze](https://arxiv.org/abs/2606.05806), [RITE](https://arxiv.org/abs/2610.27777)) |
+| Long-horizon planning | Wrong precondition, stale context or self-reinforcing error | Locate the causal mistake and attempt a bounded correction, not a generic fresh prompt ([Sentry](https://arxiv.org/abs/2610.02994), [ReplayRCA](https://arxiv.org/abs/2610.41025)) |
+| Workspace or GUI | Damaged files, inherited GUI error | Restore a **supported** snapshot/goal state, then confirm task continuation ([AgentRewind](https://arxiv.org/abs/2608.14380), [CUA-Recovery](https://arxiv.org/abs/2610.27645)) |
+| External write | A write might have committed before the error was returned | Reconcile in-flight status and committed effects; use tool idempotency/conditional contracts; stop when uncertainty cannot be resolved ([LIMBO](https://arxiv.org/abs/2609.29095)) |
+| Multi-agent workflow | Wrong teammate output or failed dependency branch | Keep valid contributions, correct affected dependencies, verify before downstream reuse ([Dittany](https://arxiv.org/abs/2610.42144), [TraceFix](https://doi.org/10.1145/3786335.3813159)) |
+| Security incident | Injection redirects a legitimate goal or compromised tool output | Contain the incident, preserve the authorized user intent and verify safe continuation ([AIR](https://proceedings.mlr.press/v306/xiao26n.html), [RecoverAgent](https://aclanthology.org/2026.findings-emnlp.830/)) |
 
-Keep track of whether an intervention is detection-only, model-level learning, local workspace repair, replay under controlled state, physical scene restoration, or an actual compensating operation. For new evidence, see the [4 November publication review](research-update-2026-11-04.md).
+## Safe retry is conditional, not automatic
 
-## Recovery starts with external truth
+1. Record a stable business-operation identity, intended postcondition, and known tool contract.
+2. Query authoritative state **and** consider in-flight requests; an empty read-back cannot exclude a delayed commit.
+3. Retry only if the provider promises the necessary idempotency, conditional-write or terminal-status semantics; apply bounds and backoff.
+4. If a previously committed effect must be corrected, use a documented compensation or controlled restore. Compensation is a **new action**, not a magical rewind.
+5. Verify end state independently; keep duplicate/missing-effect evidence; stop/escalate if correct state cannot be established.
 
-A language model can recover its conversation while the actual state of a filesystem, database, browser, or remote API remains corrupted. Determine **what state is authoritative**, **whether a side effect committed**, and **which effects are reversible** before retrying.
+[LIMBO](https://arxiv.org/abs/2609.29095) tests contract impossibility boundaries; [Permission to Retry](https://arxiv.org/abs/2610.31916) adds the requirement to re-check **authorization** before reconciliation and replay. [SagaLLM](https://doi.org/10.14778/3750601.3750611) and [RAC](https://doi.org/10.1145/3786335.3813141) investigate compensation with different assumptions.
 
-| Layer | Failure | Recover with | Limitation |
-| --- | --- | --- | --- |
-| Context | Lost task history | Session persistence, reconstruction | Does not restore the world |
-| Agent loop | Invalid tool response, stuck plan | Validation, bounded retries, replanning | Retrying effectful calls may duplicate writes |
-| Workflow | Worker crash, deployment | Durable journal and step replay | External writes still need safeguards |
-| Controlled workspace | Files or OS state modified | Aligned snapshot and restore | Only covers the controlled sandbox |
-| External service | Partial update, billing, deletion | Authoritative reconciliation, idempotency key, compensation | Compensation may be impossible |
-| Multi-agent | Bad output spreads between agents | Quarantine, provenance, replay, revalidation | Shared artifacts may already be tainted |
+## Measure the result, not the narrative
 
-## Decision procedure
+A failure was not recovered merely because an agent found a likely cause, produced a revised plan, restarted from a checkpoint, or stated that work was complete. Distinguish **detected**, **localized**, **proposed**, **executed**, **verified**, and **safe abstention**.
 
-1. **Observe:** record intended action, operation ID, tool inputs, outputs, status, and independent evidence.
-2. **Detect:** flag explicit errors, broken invariants, semantic mistakes, drift or lack of progress.
-3. **Reconcile:** query authoritative state to determine whether an ambiguous action already committed.
-4. **Classify:** read-only, idempotent, compensatable, or irreversible/high-impact operation.
-5. **Decide:** retry with a stable key, choose another tool, restore aligned checkpoints, compensate, ask a human, or stop.
-6. **Verify:** inspect actual state, duplicates, collateral effects, and task success before continuing.
-7. **Resume or stop safely:** enforce retry and intervention budgets; log why recovery was chosen.
+A particularly useful negative result is that [oracle-state substitution](https://aclanthology.org/2026.realm-1.6/) rescues relatively few failures in its reported WebArena setting. Another is that [diagnostic attribution](https://aclanthology.org/2026.realm-1.15/) can be accurate without improving a recovery action. The missing step is an **independently observed corrected continuation**.
 
-## The in-flight commit trap
+## Local demonstration
 
-**A read-back that returns “absent” is not enough on its own.** The first write may still be executing and can commit after the read-back and a second write. [LIMBO](https://arxiv.org/abs/2609.29095) distinguishes lost acknowledgments from late commits and transport redelivery. If a tool lacks idempotency, conditional writes or a queryable *terminal* status (with documented consistency/in-flight bounds), safe automatic repetition may be impossible.
+Run the dependency-free simulator illustrating an acknowledged-lost committed write and the danger of blind retry:
 
-For multi-step operations, use a stable business-operation ID propagated to each write, record which subeffects committed, and make the **retry/compensation boundary explicit**. [SagaLLM](https://doi.org/10.14778/3750601.3750611), [Atomix](https://arxiv.org/abs/2602.14849), [RAC](https://arxiv.org/abs/2605.03409) and [DelAct](https://doi.org/10.1109/IWQoS70441.2026.11661202) investigate different transaction and settlement mechanisms, but each requires tool-contract assumptions. Compensation can itself fail, have fees, or leave visible residual effects.
+```bash
+python examples/ambiguous_write_demo.py
+```
 
-Where possible, compare *expected authorized effects* with actual persistent effects before continuing: [EffectMatch](https://arxiv.org/abs/2609.31301) investigates this in a controlled execution boundary. Log the effect history as well as the final success claim.
+This only exercises a synthetic state machine with stated operation-key behavior; it does not prove exactly-once results for external services.
 
-## Verify authorization and truthful failure reporting
-
-A crash-safe checkpoint does not preserve permission to make a new request forever. [Permission to Retry](https://arxiv.org/abs/2610.31916) distinguishes current authorization to **dispatch**, authority to **reconcile**, and evidence about which effects already occurred. Recheck the relevant principal and policy before continuing a deferred or compensated action.
-
-A successful-looking tool response can still be semantically wrong. For critical decisions, use a separately grounded state check; [RITE](https://arxiv.org/abs/2610.27777) illustrates the silent-error exposure problem. A final agent message should distinguish verified completion from **uncertain**, **failed**, and **not attempted** states, and cite actual observations rather than generating fabricated success. See [Failure-Transparent Agents](https://arxiv.org/abs/2609.35732).
-
-For multi-agent workflows, asynchronous results can arrive after the task has changed. Preserve dependency-valid progress, invalidate affected results and re-verify downstream state; [Async-RBench](https://arxiv.org/abs/2610.32429) and [REVISE](https://arxiv.org/abs/2609.00643) investigate these controlled settings. These are not substitutes for application-specific external effect contracts.
-
-## Example: lost response after committed write
-
-An agent creates an invoice. The remote API commits it, but the network drops the response. Retrying the same create call might create a second invoice.
-
-**Safer design:** assign a stable business-operation identifier before the request, query the remote service by that identifier after a timeout, and retry only if the API supports the required idempotency/absence guarantees. Stop and escalate if the outcome is unknowable. **A workflow engine does not by itself make an arbitrary external effect exactly once.**
-
-Try the [offline example](../examples/ambiguous_write_demo.py).
-
-## Recovery metrics
-
-- **First-error detection:** percentage of actual first mistakes correctly localized.
-- **Verified recovery rate:** recovered episodes divided by failure-exposed episodes, with explicit success criteria.
-- **Intervention precision:** necessary versus unnecessary interventions; agents sometimes self-recover.
-- **Latency and cost:** additional steps, elapsed time, tokens, tool calls, and infra costs.
-- **Duplicate side effects:** repeated remote mutations, ideally zero.
-- **Collateral damage:** irreversible or unintended changes even in runs marked successful.
-- **Safe stop:** appropriate human escalation/abstention on high-risk ambiguous actions.
-
-## Diagnosis is not recovery
-
-Methods such as [AgentRx](https://aclanthology.org/2026.findings-emnlp.598/) and [TRAJDEBUG](https://aclanthology.org/2026.findings-emnlp.437/) can identify a likely critical fault, but this alone does not repair real state. [AgentDebugX](https://aclanthology.org/2026.emnlp-demos.52/), [CUADebug](https://aclanthology.org/2026.findings-emnlp.530/) and [PROBE](https://arxiv.org/abs/2605.08717) investigate how grounded diagnosis informs a controlled second attempt. Before any rerun: preserve an operation key, determine which effects already committed, choose a valid checkpoint, constrain the next action and independently verify its effects. If these conditions cannot be met, escalate.
-
-## Failure-injection checklist
-
-| Fault | Expected recovery |
-| --- | --- |
-| Rate limit or transient outage | Backoff and capped retry |
-| Silent incorrect tool result | Independent verification |
-| Timeout after remote commit | Reconcile before retry |
-| Partial batch success | Resume missing items only |
-| Worker crash | Replay without duplicating effects |
-| Lost task context | Rehydrate goal and real environment state |
-| Overwritten files | Restore snapshot, run checks |
-| Irreversible uncertain effect | Stop or escalate |
-
-See the [30 October research review](research-update-2026-10-30.md), [benchmarks](benchmarks.md), [production systems](production-systems.md) and the [transactional recovery research review](research-update-2026-10-29-transactional.md).
+For deeper methodology see [benchmarks](benchmarks.md) and the [57 curated research publications](../README.md#curated-papers).
