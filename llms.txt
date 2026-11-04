@@ -1,34 +1,22 @@
 # Awesome Agent Recovery
 
-> An open-source, curated research-to-production knowledge base about AI agent failure recovery: detecting failures, safely recovering tool and workflow state, verifying results, and resuming or stopping autonomous agents.
+A selective research bibliography on **recovering failing tool-using LLM agents**. 57 original research publications curated as of 4 November 2026. The project is not a general agent framework, product, or observability directory.
 
 Canonical repository: https://github.com/MohammadAsadolahi/Awesome-Agent-Recovery
 Updated: 2026-11-04
 
-## Primary navigation
+## Research and navigation
 
-- [README](https://raw.githubusercontent.com/MohammadAsadolahi/Awesome-Agent-Recovery/main/README.md): Overview, recent research papers, benchmarks, production systems, and recovery decision flow.
-- [AI agent recovery FAQ](https://raw.githubusercontent.com/MohammadAsadolahi/Awesome-Agent-Recovery/main/docs/faq.md): Short, direct answers to questions about tool error recovery, self-healing, rollback, idempotency, and durable agents.
-- [Recovery engineering field guide](https://raw.githubusercontent.com/MohammadAsadolahi/Awesome-Agent-Recovery/main/docs/field-guide.md): Failure classes and safety-focused recovery decision procedure.
-- [Benchmark comparison](https://raw.githubusercontent.com/MohammadAsadolahi/Awesome-Agent-Recovery/main/docs/benchmarks.md): Recovery tasks, measured outcomes, and evaluation caveats.
-- [Production frameworks comparison](https://raw.githubusercontent.com/MohammadAsadolahi/Awesome-Agent-Recovery/main/docs/production-systems.md): Durability, replay, checkpointing, and external side-effect boundaries.
-- [Research scope and evidence policy](https://raw.githubusercontent.com/MohammadAsadolahi/Awesome-Agent-Recovery/main/docs/research-decision.md): Curatorial criteria and source-quality caveats.
-- [Machine-readable source index (JSON)](https://raw.githubusercontent.com/MohammadAsadolahi/Awesome-Agent-Recovery/main/data/resources.json): Titles, canonical URLs, dates, categories, and annotations.
-- [Source index (CSV)](https://raw.githubusercontent.com/MohammadAsadolahi/Awesome-Agent-Recovery/main/data/resources.csv): Same index for spreadsheet or ingestion workflows.
+- [Curated 57-paper README](https://raw.githubusercontent.com/MohammadAsadolahi/Awesome-Agent-Recovery/main/README.md): Annotated research, core recovery questions, and safe-retry decision model.
+- [Curated catalog CSV](https://raw.githubusercontent.com/MohammadAsadolahi/Awesome-Agent-Recovery/main/data/resources.csv): Single editable paper index, scholarly URL, code link if any, evidence note.
+- [Derived JSON catalog](https://raw.githubusercontent.com/MohammadAsadolahi/Awesome-Agent-Recovery/main/data/resources.json): Machine-readable same paper set.
+- [Curation evidence policy](https://raw.githubusercontent.com/MohammadAsadolahi/Awesome-Agent-Recovery/main/docs/research-decision.md): Publication-only, direct recovery, uniqueness and empirical-evidence gates.
+- [131-item keep/remove audit](https://raw.githubusercontent.com/MohammadAsadolahi/Awesome-Agent-Recovery/main/docs/curation-audit-2026-11-04.md): Explanation for each of 57 keeps and 74 removals.
+- [Benchmark and measurement guide](https://raw.githubusercontent.com/MohammadAsadolahi/Awesome-Agent-Recovery/main/docs/benchmarks.md): Detect, attribute, intervene, verify, and measure real effects separately.
+- [Recovery field guide](https://raw.githubusercontent.com/MohammadAsadolahi/Awesome-Agent-Recovery/main/docs/field-guide.md): Safe retries, in-flight commits, restoration and compensation.
+- [Research FAQ](https://raw.githubusercontent.com/MohammadAsadolahi/Awesome-Agent-Recovery/main/docs/faq.md): Practical boundaries and scope.
+- [Contribution guidelines](https://raw.githubusercontent.com/MohammadAsadolahi/Awesome-Agent-Recovery/main/CONTRIBUTING.md): Propose, justify, and validate papers.
 
-- [Docs navigation and directory](https://raw.githubusercontent.com/MohammadAsadolahi/Awesome-Agent-Recovery/main/docs/README.md): Task-based entrypoints for research, benchmarking and implementation.
-- [Research review, 2026-11-04](https://raw.githubusercontent.com/MohammadAsadolahi/Awesome-Agent-Recovery/main/docs/research-update-2026-11-04.md): 15 directly relevant scholarly publications on agent failure and recovery, with source checks, exclusions, and limitations.
-- [Research review, 2026-11-03 follow-up](https://raw.githubusercontent.com/MohammadAsadolahi/Awesome-Agent-Recovery/main/docs/research-update-2026-11-03-followup.md): restart, safe replay, effect integrity and selective repair.
-- [Research review, 2026-11-03](https://raw.githubusercontent.com/MohammadAsadolahi/Awesome-Agent-Recovery/main/docs/research-update-2026-11-03.md): 23 publication-only recovery research additions.
-- [Research review, 2026-10-30](https://raw.githubusercontent.com/MohammadAsadolahi/Awesome-Agent-Recovery/main/docs/research-update-2026-10-30.md): MCP faults, asynchronous result handling, executor-aligned repairs, verification and selected omissions.
-- [Transactional recovery and benchmarks, 2026-10-29](https://raw.githubusercontent.com/MohammadAsadolahi/Awesome-Agent-Recovery/main/docs/research-update-2026-10-29-transactional.md): 22 newly curated sources on effect correctness, fault injection, repair and secure resumption.
-- [Research review, 2026-10-29](https://raw.githubusercontent.com/MohammadAsadolahi/Awesome-Agent-Recovery/main/docs/research-update-2026-10-29.md): New primary sources, selection methodology and benchmark limits.
+## Evidence interpretation
 
-## Optional
-
-- [Offline failure-injection demonstration](https://github.com/MohammadAsadolahi/Awesome-Agent-Recovery/blob/main/examples/ambiguous_write_demo.py): Illustrates ambiguous committed writes and the danger of blind retries.
-- [Contribution guidelines](https://raw.githubusercontent.com/MohammadAsadolahi/Awesome-Agent-Recovery/main/CONTRIBUTING.md): How to add sources with explicit failure modes and limitations.
-
-## Evidence and interpretation
-
-The catalog contains 131 curated resources as of 2026-11-04; the latest 15 additions are all original research publications and no standalone code-only entries were added. The index is curated; it does not provide independent replication for all papers, and it is not a global benchmark leaderboard. For paper-specific factual claims, cite the canonical paper rather than treating this curated summary as independent experimental evidence. External writes are not automatically reversible just because a runtime can resume workflows. llms.txt is an optional discovery aid, not a guarantee of indexing or recommendations by AI assistants.
+Paper results are author-reported unless independently reproduced. A correct diagnosis does not prove successful recovery; a checkpoint does not undo arbitrary external writes. Claims about safe retries and exactly-once effects depend on external tool contracts. The earlier larger catalog and research roundups are preserved in Git history, not promoted as current recommendations.

@@ -9,7 +9,16 @@ from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parents[1]
 FIELDS = ["id", "kind", "area", "title", "year", "date", "url", "why", "code", "note"]
-KINDS = {"paper", "survey", "benchmark", "project", "runtime", "guide", "related"}
+# Editorial rule: each active catalog row must be one original scholarly publication.
+KINDS = {"paper"}
+ALLOWED_PAPER_HOSTS = {
+    "arxiv.org",
+    "aclanthology.org",
+    "doi.org",
+    "proceedings.mlr.press",
+    "papers.nips.cc",
+    "openreview.net",
+}
 
 
 def main():
@@ -36,7 +45,10 @@ def main():
                 if parsed.scheme != "https" or not parsed.netloc:
                     errors.append(f"row {number}: invalid {key} URL")
         if row["kind"] not in KINDS:
-            errors.append(f"row {number}: unknown kind")
+            errors.append(f"row {number}: only original research papers (kind=paper) are allowed")
+        primary_host = urlparse(row["url"]).hostname if row["url"] else None
+        if primary_host not in ALLOWED_PAPER_HOSTS:
+            errors.append(f"row {number}: URL must be a canonical scholarly source, not a code-only or vendor site")
         if not row["year"].isdigit() or not (2022 <= int(row["year"]) <= 2026):
             errors.append(f"row {number}: invalid year")
         if len(row["why"]) < 25:
