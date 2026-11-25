@@ -39,4 +39,4 @@ python examples/ambiguous_write_demo.py
 
 This only exercises a synthetic state machine with stated operation-key behavior; it does not prove exactly-once results for external services.
 
-For deeper methodology see [benchmarks](benchmarks.md) and the [57 curated research publications](../README.md#curated-papers).
+For deeper methodology see [benchmarks](benchmarks.md) and the [64 curated research publications](../README.md#curated-papers).

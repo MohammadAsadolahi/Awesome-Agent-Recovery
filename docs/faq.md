@@ -6,9 +6,9 @@
 
 A controlled intervention after failure that improves the task's actual state or outcome: bounded tool retry, replanning, local repair, checkpoint restoration, compensation, or safe stopping. A recovery benchmark must measure one of those outcomes, not just detect that an error occurred.
 
-### Why are there only 57 papers now?
+### Why is the collection selective?
 
-The [comprehensive curation audit](curation-audit-2026-11-04.md) screens the prior 131 resources and explains 74 removals. It favors directly measured recovery and distinctive methodological contributions over sheer volume. Companion software and broad frameworks are no longer separate entries.
+The [comprehensive curation audit](curation-audit-2026-11-04.md) screens the prior 131 resources and explains 74 removals. It favors directly measured recovery and distinctive methodological contributions over sheer volume. Companion software and broad frameworks are no longer separate entries. The [25 November update](curation-update-2026-11-25.md) adds seven qualified papers, bringing the catalog to 64.
 
 ### Does diagnosing the root cause mean the task is fixed?
 
@@ -36,4 +36,4 @@ Being influential or peer-reviewed is not enough. General agent reasoning, agent
 
 ### How can I propose a paper?
 
-Read [CONTRIBUTING.md](../CONTRIBUTING.md), identify the precise agent failure and recovery outcome, compare against the existing 57 entries, and provide a canonical scholarly source with limitations.
+Read [CONTRIBUTING.md](../CONTRIBUTING.md), identify the precise agent failure and recovery outcome, compare against the existing catalog, and provide a canonical scholarly source with limitations.

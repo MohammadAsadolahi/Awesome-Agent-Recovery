@@ -1,11 +1,13 @@
 # Recovery Benchmarks and Evaluation Protocol
 
-**Updated: 4 November 2026.** All quantitative claims are from their authors unless independently reproduced. These benchmarks cover different environments and metrics; **do not build a cross-paper leaderboard**.
+**Updated: 25 November 2026.** All quantitative claims are from their authors unless independently reproduced. These benchmarks cover different environments and metrics; **do not build a cross-paper leaderboard**.
 
 ## Benchmarks that test recovery after failure
 
 | Publication | Failure / intervention | What is actually measured |
 | --- | --- | --- |
+| [RetryRealistic](https://arxiv.org/abs/2611.28341) | Controlled fault persistence in executable filesystem, SQLite, HTTP and shell tasks | Ground-truth recovery and fabrication; corrective-monitor comparisons |
+| [AgentFaultBench](https://arxiv.org/abs/2611.20711) | Injected tool errors in isolated GitLab tasks; neutral vs guided feedback | Independent final-state checks and required verification; missing outcomes retained as uncertainty |
 | [Recovery-Bench](https://openreview.net/forum?id=8FZRnDgDxq) | Restart in an inherited failed terminal-task state | Post-failure task completion, distinct from clean-task competence |
 | [CUA-Recovery](https://arxiv.org/abs/2610.27645) | Persistent inherited desktop errors | Recognition and successful correction of inherited error states |
 | [ReTrace](https://arxiv.org/abs/2610.27954) | Controlled GUI mistakes and goal-oriented replay | Transition-consistent recovery, not mere screenshot similarity |
@@ -23,6 +25,8 @@
 | [ReplayRCA](https://arxiv.org/abs/2610.41025) | Single corrected action after reset to a chosen failed step | Causal repair score against original-action placebo replay |
 
 Several methods study **whether an intervention helps at all**: [From Credit Assignment to Repair](https://aclanthology.org/2026.realm-1.15/), [Oracle-State Intervention](https://aclanthology.org/2026.realm-1.6/), [Repairs for Whom?](https://arxiv.org/abs/2610.38610), and [When to Intervene?](https://arxiv.org/abs/2610.36471). Negative results are important: diagnosis or a stronger evaluator can fail to improve the executed outcome.
+
+Recent complementary evidence: [Idempotency Is Not Recovery](https://arxiv.org/abs/2611.23353) separates duplicate suppression from reconciliation with independent effect checks. [Which Failure Does an Intervention Repair?](https://arxiv.org/abs/2611.29290) compares matched intervention configurations and distinguishes visible-error rescue from generic performance improvements. [Exercised, Rarely Recovered](https://arxiv.org/abs/2611.27090) codes recovery outcomes in public reports; its observational sample is not a benchmark or an estimate of deployment-wide failure rates.
 
 ## Minimum reproducible experimental record
 

@@ -1,17 +1,18 @@
 # Awesome Agent Recovery
 
-A selective research bibliography on **recovering failing tool-using LLM agents**. 57 original research publications curated as of 4 November 2026. The project is not a general agent framework, product, or observability directory.
+A selective research bibliography on **recovering failing tool-using LLM agents**. 64 original research publications curated as of 25 November 2026. The project is not a general agent framework, product, or observability directory.
 
 Canonical repository: https://github.com/MohammadAsadolahi/Awesome-Agent-Recovery
-Updated: 2026-11-04
+Updated: 2026-11-25
 
 ## Research and navigation
 
-- [Curated 57-paper README](https://raw.githubusercontent.com/MohammadAsadolahi/Awesome-Agent-Recovery/main/README.md): Annotated research, core recovery questions, and safe-retry decision model.
+- [Curated 64-paper README](https://raw.githubusercontent.com/MohammadAsadolahi/Awesome-Agent-Recovery/main/README.md): Annotated research, core recovery questions, and safe-retry decision model.
 - [Curated catalog CSV](https://raw.githubusercontent.com/MohammadAsadolahi/Awesome-Agent-Recovery/main/data/resources.csv): Single editable paper index, scholarly URL, code link if any, evidence note.
 - [Derived JSON catalog](https://raw.githubusercontent.com/MohammadAsadolahi/Awesome-Agent-Recovery/main/data/resources.json): Machine-readable same paper set.
 - [Curation evidence policy](https://raw.githubusercontent.com/MohammadAsadolahi/Awesome-Agent-Recovery/main/docs/research-decision.md): Publication-only, direct recovery, uniqueness and empirical-evidence gates.
 - [131-item keep/remove audit](https://raw.githubusercontent.com/MohammadAsadolahi/Awesome-Agent-Recovery/main/docs/curation-audit-2026-11-04.md): Explanation for each of 57 keeps and 74 removals.
+- [25 November research update](https://raw.githubusercontent.com/MohammadAsadolahi/Awesome-Agent-Recovery/main/docs/curation-update-2026-11-25.md): Seven additions, evidence limitations and excluded candidates.
 - [Benchmark and measurement guide](https://raw.githubusercontent.com/MohammadAsadolahi/Awesome-Agent-Recovery/main/docs/benchmarks.md): Detect, attribute, intervene, verify, and measure real effects separately.
 - [Recovery field guide](https://raw.githubusercontent.com/MohammadAsadolahi/Awesome-Agent-Recovery/main/docs/field-guide.md): Safe retries, in-flight commits, restoration and compensation.
 - [Research FAQ](https://raw.githubusercontent.com/MohammadAsadolahi/Awesome-Agent-Recovery/main/docs/faq.md): Practical boundaries and scope.

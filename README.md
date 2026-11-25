@@ -1,7 +1,7 @@
 # Awesome Agent Recovery
 
 [![Awesome](https://awesome.re/badge-flat.svg)](https://awesome.re)
-[![Research papers](https://img.shields.io/badge/research_papers-57-2563eb)](data/resources.csv)
+[![Research papers](https://img.shields.io/badge/research_papers-64-2563eb)](data/resources.csv)
 [![Quality checks](https://github.com/MohammadAsadolahi/Awesome-Agent-Recovery/actions/workflows/quality.yml/badge.svg)](https://github.com/MohammadAsadolahi/Awesome-Agent-Recovery/actions/workflows/quality.yml)
 [![Metadata license: CC0 1.0](https://img.shields.io/badge/metadata_license-CC0--1.0-16a34a)](LICENSE)
 [![Contributions](https://img.shields.io/badge/contributions-curated-4b5563)](CONTRIBUTING.md)
@@ -14,7 +14,7 @@
 
 This is **not** a general AI-agent list, observability directory, prompt-engineering resource, or dump of every paper mentioning *reliability*. The collection intentionally prioritizes **quality, directness, and nonredundant methods over quantity**.
 
-**Last comprehensive curation:** 4 November 2026 · **57 original research papers** (from 131 mixed entries). Publication/preprint status and limitations appear in the metadata; reported results belong to paper authors unless independently reproduced. [Full keep/remove audit](docs/curation-audit-2026-11-04.md).
+**Last research update:** 25 November 2026 · **64 original research papers** (57 retained on 4 November, plus 7 new publications). Publication/preprint status and limitations appear in the metadata; reported results belong to paper authors unless independently reproduced. [Full keep/remove audit](docs/curation-audit-2026-11-04.md) · [November 25 update audit](docs/curation-update-2026-11-25.md).
 
 ## Contents
 
@@ -79,12 +79,13 @@ flowchart TD
 
 ## Curated papers
 
-**57 original publications.** Each paper appears once below. Companion code, if available, is recorded in the [canonical CSV](data/resources.csv) and [derived JSON](data/resources.json); it is **not** counted as another resource.
+**64 original publications.** Each paper appears once below. Companion code, if available, is recorded in the [canonical CSV](data/resources.csv) and [derived JSON](data/resources.json); it is **not** counted as another resource.
 
 ### Safe retries, transactions, and side-effect correctness
 
 Effectful calls may have committed, partly committed, or remained in flight. These papers evaluate when agents may retry, compensate, commit, or stop; a local checkpoint alone cannot undo remote state.
 
+- [Idempotency Is Not Recovery: A Fault-Injection Study of Language-Model Agent Tool Actions](https://arxiv.org/abs/2611.23353) (2026, preprint) — Separates duplicate-effect suppression from recovery of ambiguous outcomes using fault injection, independent target-state checks, reconciliation and ledger ablations.
 - [Evidence-Guided Recovery for AI Agents with Ambiguous Tool Outcomes and Partial Execution](https://arxiv.org/abs/2610.41453) (2026) — Plans safe continuation after ambiguous tool outcomes using publicly supported effect states, provider contracts and independent replay certificates.
 - [Permission to Retry: A Study of Authorization and Recovery in AI Agent Workflows](https://arxiv.org/abs/2610.31916) (2026) — Examines whether recovering workflows still have authority to dispatch reconcile or retry an uncertain external effect.
 - [UndoBench: Separating Task Competence from Recovery Capability in Tool-Using AI Agents](https://arxiv.org/abs/2610.05622) (2026) — Measures conditional recovery separately from nominal task competence under phased enterprise write failures.
@@ -103,6 +104,8 @@ Effectful calls may have committed, partly committed, or remained in flight. The
 
 Failure-triggered interventions with corrected actions or measured post-intervention outcomes, including selective rollback of invalid work and recovery under tool faults.
 
+- [Recovery Gone Too Far: Understanding and Repairing Risky Fallback in LLM Agents](https://arxiv.org/abs/2611.19886) (2026, preprint) — Studies action-boundary violations during recovery by substitute tools and evaluates a calibrated monitor that returns risky fallback decisions to the agent.
+- [Same Error, Different Recovery: How Delivery Changes LLM Agent Behavior](https://arxiv.org/abs/2611.11581) (2026, preprint) — Controls feedback placement, retained history and conversational turns to isolate their effects on retry, correction and stopping after tool failures.
 - [Dittany: Contribution-Guided Repair Framework for MAS Applications](https://arxiv.org/abs/2610.42144) (2026) — Locates unmet multi-agent task conditions and repairs actions or graph dependencies while retaining previously validated contributions.
 - [Verify--Backtrack Loop: Structured Precondition Recovery for Long-Horizon Language Agents](https://arxiv.org/abs/2610.41564) (2026) — Uses goal-stack verification and typed failure attribution to trigger explicit retry, subgoal updates or backtracking after unmet prerequisites.
 - [AgentHeal: Evaluating Goal-Preserving Resource Recovery of Web Agents under Access Barriers](https://arxiv.org/abs/2610.39234) (2026) — Benchmarks web-agent recovery from blocked links, authorization walls and rate limits while preserving the original authorized goal.
@@ -124,6 +127,7 @@ Failure-triggered interventions with corrected actions or measured post-interven
 
 Restore the state needed to continue, preserve still-valid work and verify the resulting execution. These results assume stated resettable or controlled boundaries.
 
+- [Exercised, Rarely Recovered: What Public Reports Say About Recovery in 50 AI Agent Harnesses and Runtimes](https://arxiv.org/abs/2611.27090) (2026, preprint) — Codes observed outcomes of recovery mechanisms in public reports and contrasts practical restoration evidence with research-runtime guarantees.
 - [Lost in Recovery: Demystifying Recovery Behavior of Computer-Use Agents via Goal-Oriented Action Replay](https://arxiv.org/abs/2610.27954) (2026) — Introduces ReTrace and transition-consistent recovery scoring for computer-use agents restoring GUI state after controlled mistakes.
 - [Rollback the World, Keep the Reflection: Rollback-Induced Reflection for Long-Horizon LLM Agents](https://arxiv.org/abs/2609.18304) (2026) — Couples controlled environment rollback with retained knowledge from the failed trajectory to guide subsequent agent execution.
 - [AgentRewind: Recoverable Execution for Long-Horizon LLM Agents](https://arxiv.org/abs/2608.14380) (2026) — Aligns agent-context and environment-state checkpoints for resumable execution.
@@ -134,6 +138,9 @@ Restore the state needed to continue, preserve still-valid work and verify the r
 
 Benchmarks and experiments that test recoverability, actual corrected continuations, error-injection outcomes, intervention costs, or recovery-vs-diagnosis limitations.
 
+- [Which Failure Does an Intervention Repair? When Agent Interventions Help, and Where Self-Evolving Skills Stall](https://arxiv.org/abs/2611.29290) (2026, preprint) — Uses matched changes to agent harnesses, skills, models and budgets to distinguish failure-conditioned rescue from aggregate accuracy gains.
+- [When Tools Fail, Agents Fabricate: Silent Failure and Verification-First Oversight in Tool-Using LLM Agents](https://arxiv.org/abs/2611.28341) (2026, preprint) — RetryRealistic injects persistent or transient tool faults in executable environments and tests a verification-first monitor that directs corrective actions.
+- [AgentFaultBench: State-Verified Evaluation of Tool-Fault Recovery](https://arxiv.org/abs/2611.20711) (2026, preprint) — Tests recovery advice against neutral feedback under injected faults using independent checks of GitLab state, required verification and final responses.
 - [ReplayRCA: Measuring Post-hoc Diagnosis and Live Oversight of Agent Failures by Counterfactual Replay](https://arxiv.org/abs/2610.41025) (2026) — Restores failed LLM agent execution to the selected step and tests whether a proposed corrected action improves outcome against a placebo replay.
 - [Repairs for Whom? Evaluator-Executor Mismatch in Selecting Repairs for Failed LLM Agents](https://arxiv.org/abs/2610.38610) (2026) — Tests whether candidate repairs selected by a different evaluator improve the deployed agent's own rollouts.
 - [CUA-Recovery: Benchmarking Error Recovery in Long-Horizon Computer-Use Agents](https://arxiv.org/abs/2610.27645) (2026) — Benchmarks recognition and repair of inherited desktop errors over persistent workflows.
